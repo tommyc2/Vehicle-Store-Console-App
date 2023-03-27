@@ -65,7 +65,9 @@ public abstract class Vehicle {
     }
 
     public void setModel(String model) {
-        this.model = model;
+        if (Utilities.validStringlength(model,15)){
+            this.model = model;
+        }
     }
 
     @Override
