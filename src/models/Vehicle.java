@@ -6,24 +6,17 @@ import java.util.Objects;
 
 public abstract class Vehicle {
     String regNumber = "No reg";
-    int year;
-    float cost;
+    int year = 2000;
+    float cost = 1000;
     Manufacturer manufacturer;
     String model = "No model";
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Vehicle vehicle)) return false;
-        return year == vehicle.year && Float.compare(vehicle.cost, cost) == 0 && regNumber.equals(vehicle.regNumber) && manufacturer.equals(vehicle.manufacturer) && model.equals(vehicle.model);
-    }
-
     public Vehicle(String regNumber, String model, float cost, Manufacturer manufacturer, int year) {
         setRegNumber(regNumber);
-        this.year = year;
-        this.cost = cost;
+        setYear(year);
+        setCost(cost);
         this.manufacturer = manufacturer;
-        this.model = model;
+        setModel(model);
     }
 
     public String getRegNumber() {
@@ -31,9 +24,7 @@ public abstract class Vehicle {
     }
 
     public void setRegNumber(String regNumber) {
-        if (Utilities.validStringlength(regNumber,8)){
-            this.regNumber = regNumber;
-        }
+        this.regNumber = Utilities.truncateString(regNumber,8);
     }
 
     public int getYear() {
@@ -41,7 +32,9 @@ public abstract class Vehicle {
     }
 
     public void setYear(int year) {
-        this.year = year;
+        if (Utilities.validRange(year,2000,2023)){
+            this.year = year;
+        }
     }
 
     public float getCost() {
@@ -49,7 +42,9 @@ public abstract class Vehicle {
     }
 
     public void setCost(float cost) {
-        this.cost = cost;
+        if (cost >= 1000){
+            this.cost = cost;
+        }
     }
 
     public Manufacturer getManufacturer() {
@@ -68,19 +63,44 @@ public abstract class Vehicle {
         if (Utilities.validStringlength(model,15)){
             this.model = model;
         }
+        else{
+            this.model = Utilities.truncateString(model,15);
+        }
     }
 
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "regNumber='" + regNumber + '\'' +
-                ", year=" + year +
-                ", cost=" + cost +
-                ", manufacturer=" + manufacturer +
-                ", model='" + model + '\'' +
-                '}';
+
+    String str = "Vehicle => " + "Reg Number: " + this.regNumber + " Model: " + this.model + " Cost: " +
+            this.cost + " | Manufacturer => Name: " + manufacturer.getManufacturerName() +
+            " No. of employees: " + manufacturer.getNumEmployees() + " | Age of vehicle: ";
+
+    if (this.getAge() == 0){
+        str += "Brand New";
+    }
+    if (this.getAge() == 1){
+        str += "1 year old";
+    }
+    if (this.getAge() > 1){
+        str += this.getAge() + " years old ";
+    }
+
+    return str;
+
     }
 
     public abstract double getCarbonFootprint();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vehicle vehicle)) return false;
+        return year == vehicle.year && Float.compare(vehicle.cost, cost) == 0 && regNumber.equals(vehicle.regNumber) && manufacturer.equals(vehicle.manufacturer) && model.equals(vehicle.model);
+    }
+
+    public int getAge(){
+        int currentYear = 2023;
+        return currentYear - getYear();
+    }
 
 }
