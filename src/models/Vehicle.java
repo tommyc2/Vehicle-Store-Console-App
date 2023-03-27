@@ -1,14 +1,25 @@
 package models;
 
+import utils.Utilities;
+
+import java.util.Objects;
+
 public abstract class Vehicle {
-    String regNumber = "";
+    String regNumber = "No reg";
     int year;
     float cost;
-    Manufacturer manufacturer; // edit later
+    Manufacturer manufacturer;
     String model = "No model";
 
-    public Vehicle(String regNumber, int year, float cost, Manufacturer manufacturer, String model) {
-        this.regNumber = regNumber;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vehicle vehicle)) return false;
+        return year == vehicle.year && Float.compare(vehicle.cost, cost) == 0 && regNumber.equals(vehicle.regNumber) && manufacturer.equals(vehicle.manufacturer) && model.equals(vehicle.model);
+    }
+
+    public Vehicle(String regNumber, String model, float cost, Manufacturer manufacturer, int year) {
+        setRegNumber(regNumber);
         this.year = year;
         this.cost = cost;
         this.manufacturer = manufacturer;
@@ -20,7 +31,9 @@ public abstract class Vehicle {
     }
 
     public void setRegNumber(String regNumber) {
-        this.regNumber = regNumber;
+        if (Utilities.validStringlength(regNumber,8)){
+            this.regNumber = regNumber;
+        }
     }
 
     public int getYear() {
@@ -65,4 +78,7 @@ public abstract class Vehicle {
                 ", model='" + model + '\'' +
                 '}';
     }
+
+    public abstract double getCarbonFootprint();
+
 }
