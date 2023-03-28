@@ -1,18 +1,20 @@
 package models;
 
+import utils.Utilities;
+
 import java.util.Objects;
 
 public class Scooter extends Vehicle {
 
-    int power;
-    int topRiderWeight;
-    float weight;
+    int power = 250;
+    int topRiderWeight = 100;
+    float weight = 5;
 
     public Scooter(String regNumber, String model, float cost, Manufacturer manufacturer, int year, int power, int topRiderWeight, float weight) {
         super(regNumber, model, cost, manufacturer, year);
-        this.power = power;
-        this.topRiderWeight = topRiderWeight;
-        this.weight = weight;
+        setPower(power);
+        setWeight(weight);
+        setTopRiderWeight(topRiderWeight);
     }
 
     public int getPower() {
@@ -20,7 +22,8 @@ public class Scooter extends Vehicle {
     }
 
     public void setPower(int power) {
-        this.power = power;
+        if (Utilities.validRange(power, 250, 1000))
+            this.power = power;
     }
 
     public int getTopRiderWeight() {
@@ -28,7 +31,9 @@ public class Scooter extends Vehicle {
     }
 
     public void setTopRiderWeight(int topRiderWeight) {
-        this.topRiderWeight = topRiderWeight;
+       if (Utilities.validRange(topRiderWeight,100,120)) {
+            this.topRiderWeight = topRiderWeight;
+        }
     }
 
     public float getWeight() {
@@ -40,7 +45,7 @@ public class Scooter extends Vehicle {
     }
     @Override
     public double getCarbonFootprint() {
-        return 0;
+        return ((power)*(weight)*(this.getAge())) / 15000;
     }
 
     @Override
@@ -51,4 +56,13 @@ public class Scooter extends Vehicle {
         return power == scooter.power && topRiderWeight == scooter.topRiderWeight && Float.compare(scooter.weight, weight) == 0;
     }
 
+    @Override
+    public String toString() {
+        String superStr = super.toString();
+
+        superStr +=
+        "Power: " + this.power + "Top Rider Weight: " + this.topRiderWeight + "Weight: " + this.weight;
+
+        return superStr;
+    }
 }
