@@ -69,5 +69,14 @@ public abstract class Car extends Vehicle {
 
     public abstract double getCarbonFootPrint();
 
+    public String toString(){
+        String superStr = super.toString();
+
+        superStr += "| Seconds To 60: " + this.secs0To60 + " Power: " + this.power + " Torque: " + this.torque
+                + "Top Speed: " + this.topSpeed;
+
+        return superStr;
+    }
+
 
 }

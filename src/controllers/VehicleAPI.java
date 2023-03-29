@@ -13,8 +13,6 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 
 public class VehicleAPI {
-    public void addVehicle(Scooter scooterBelowBoundary){
-    }
 
     // todo implements Serializer {   (when load and saved written, include the 'implements Serializer here)
 
@@ -32,6 +30,11 @@ public class VehicleAPI {
 //                return false;
 //        return true;
 //    }
+
+    public boolean isValidNewRegNumber(String regNumber){
+
+        return false;
+    }
 
 
 
@@ -61,6 +64,10 @@ public class VehicleAPI {
 //        in.close();
 //    }
 
+    public void load() throws Exception {
+
+    }
+
     /**
      * The save method uses the XStream component to write all the objects in the ArrayList
      * to the xml file stored on the hard disk.
@@ -78,5 +85,12 @@ public class VehicleAPI {
 //        return this.file.toString();
 //    }
 
+    public String fileName(){
+        return "";
+    }
+
+    public void save() throws Exception{
+
+    }
 
 }
