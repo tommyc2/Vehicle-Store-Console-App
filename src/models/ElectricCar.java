@@ -9,7 +9,7 @@ public class ElectricCar extends Car {
     private int range = 100;
     private float engineKWatts = 40;
 
-    public ElectricCar(String regNumber, String model, float cost, Manufacturer manufacturer, int year, int secs0To60, int power, float torque, int topSpeed, int range, float engineKWatts) {
+    public ElectricCar(String regNumber, String model, float cost, Manufacturer manufacturer, int year, int power,int secs0To60,int topSpeed, float torque, float engineKWatts, int range ) {
         super(regNumber, model, cost, manufacturer, year, secs0To60, power, torque, topSpeed);
         setRange(range);
         setEngineKWatts((engineKWatts));
@@ -46,5 +46,13 @@ public class ElectricCar extends Car {
     @Override
     public double getCarbonFootPrint() {
         return ((this.engineKWatts)*(getAge())) / 20000;
+    }
+
+    public String toString(){
+        String superStr = super.toString();
+
+        superStr += " | Engine Power (kW): " + this.engineKWatts + " Range: " + this.range;
+
+        return superStr;
     }
 }
