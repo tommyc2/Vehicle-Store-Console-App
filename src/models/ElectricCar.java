@@ -1,16 +1,18 @@
 package models;
 
+import utils.Utilities;
+
 import java.util.Objects;
 
 public class ElectricCar extends Car {
 
-    private int range = 0;
-    private float engineKWatts = 0;
+    private int range = 100;
+    private float engineKWatts = 40;
 
     public ElectricCar(String regNumber, String model, float cost, Manufacturer manufacturer, int year, int secs0To60, int power, float torque, int topSpeed, int range, float engineKWatts) {
         super(regNumber, model, cost, manufacturer, year, secs0To60, power, torque, topSpeed);
-        this.range = range;
-        this.engineKWatts = engineKWatts;
+        setRange(range);
+        setEngineKWatts((engineKWatts));
     }
 
     public int getRange() {
@@ -18,7 +20,9 @@ public class ElectricCar extends Car {
     }
 
     public void setRange(int range) {
-        this.range = range;
+        if (Utilities.validRange(range,100,500)){
+            this.range = range;
+        }
     }
 
     public float getEngineKWatts() {
@@ -26,7 +30,9 @@ public class ElectricCar extends Car {
     }
 
     public void setEngineKWatts(float engineKWatts) {
-        this.engineKWatts = engineKWatts;
+        if (Utilities.validRange(engineKWatts,40,60,0.01F)){
+            this.engineKWatts = engineKWatts;
+        }
     }
 
     @Override
@@ -39,6 +45,6 @@ public class ElectricCar extends Car {
 
     @Override
     public double getCarbonFootPrint() {
-        return 0;
+        return ((this.engineKWatts)*(getAge())) / 20000;
     }
 }
