@@ -6,9 +6,9 @@ import java.util.Objects;
 
 public class Scooter extends Vehicle {
 
-    int power = 250;
-    int topRiderWeight = 100;
-    float weight = 5;
+    private int power = 250;
+    private int topRiderWeight = 100;
+    private float weight = 5;
 
     public Scooter(String regNumber, String model, float cost, Manufacturer manufacturer, int year, int power, int topRiderWeight, float weight) {
         super(regNumber, model, cost, manufacturer, year);
@@ -44,7 +44,7 @@ public class Scooter extends Vehicle {
         this.weight = weight;
     }
     @Override
-    public double getCarbonFootprint() {
+    public double getCarbonFootPrint() {
         return ((power)*(weight)*(this.getAge())) / 15000;
     }
 

@@ -2,12 +2,10 @@ package models;
 
 import utils.Utilities;
 
-import java.util.Objects;
-
 public abstract class Vehicle {
-    String regNumber = "No reg";
-    int year = 2000;
-    float cost = 1000;
+    private String regNumber = "No reg";
+    private int year = 2000;
+    private float cost = 1000;
     Manufacturer manufacturer;
     String model = "No model";
 
@@ -89,7 +87,7 @@ public abstract class Vehicle {
 
     }
 
-    public abstract double getCarbonFootprint();
+    public abstract double getCarbonFootPrint();
 
     @Override
     public boolean equals(Object o) {

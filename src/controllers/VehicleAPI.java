@@ -12,7 +12,11 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 
-public class VehicleAPI { // todo implements Serializer {   (when load and saved written, include the 'implements Serializer here)
+public class VehicleAPI {
+    public void addVehicle(Scooter scooterBelowBoundary){
+    }
+
+    // todo implements Serializer {   (when load and saved written, include the 'implements Serializer here)
 
  // more private fields here (file)
 
