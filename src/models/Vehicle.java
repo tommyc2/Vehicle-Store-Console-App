@@ -74,7 +74,7 @@ public abstract class Vehicle {
             " No. of employees: " + manufacturer.getNumEmployees() + " | Age of vehicle: ";
 
     if (this.getAge() == 0){
-        str += "Brand New";
+        str += "Brand New!";
     }
     if (this.getAge() == 1){
         str += "1 year old";

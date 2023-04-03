@@ -14,30 +14,142 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class VehicleAPI {
 
-    // todo implements Serializer {   (when load and saved written, include the 'implements Serializer here)
+    private List<Vehicle> vehicles;
+    private File file;
 
- // more private fields here (file)
+    public VehicleAPI(File file) {
+        this.file = file;
+    }
+
+    // todo implements Serializer {   (when load and saved written, include the 'implements Serializer here)
 
     //TODO refer to the spec and add in the required methods here (make note of which methods are given to you first!)
 
-
-
-
-    // checks if regNumber is a new reg number i.e. it does not already exist in the collection
-//    public boolean isValidNewRegNumber(String regNumber){
-//        for(Vehicle vehicle: vehicles)     //todo - declare and instantiate vehicles
-//            if (vehicle.getRegNumber().equals(regNumber))
-//                return false;
-//        return true;
-//    }
-
-    public boolean isValidNewRegNumber(String regNumber){
-
+    public boolean updateElectricCar(String dummy1, ElectricCar dummy){
         return false;
     }
 
 
+    // -------------------------- //
+    // CRUD ON Vehicles ArrayList //
+    // -------------------------- //
+    public boolean addVehicle(Vehicle dummy){
+        return false;
+    }
 
+    public Vehicle deleteVehicleByIndex(int dummy){
+        return null;
+    }
+
+    public Vehicle deleteVehicleByRegNumber(String dummy){
+        return null;
+    }
+
+    public Vehicle getVehicleByRegNumber(String dummy){
+        return null;
+    }
+
+    public Vehicle getVehicleByIndex(int dummy){
+        return null;
+    }
+
+    // -------------------------- //
+    //     Reporting Methods     //
+    // -------------------------- //
+
+    public String listAllCarbonFuelsByFuelType(String dummy){
+        return "";
+    }
+
+    public String listAllVehiclesAfterAGivenYear(int year){
+        return "";
+    }
+
+    public String listAllVehicles(){
+    return "No vehicles";
+    }
+
+    public String listAllScooters(){
+        return "";
+    }
+
+    public String listAllElectricCars(){
+        return "";
+    }
+
+    public String listAllCarbonFuelCars(){
+        return "";
+    }
+
+    public String listAllVehiclesByChosenManufacturer(Manufacturer dummy){
+        return "";
+    }
+
+    public String listAllVehiclesEqualToAGivenYear(int year){
+        return "";
+    }
+
+    public String numberOfVehicles(){
+        return "";
+    }
+
+    public String numberOfScooters(){
+        return "";
+    }
+
+    public String numberOfElectricCars(){
+        return "";
+    }
+
+    public String numberOfCarbonCars(){
+        return "";
+    }
+
+    public String numberOfVehiclesByChosenManufacturer(Manufacturer manufacturerObj){
+        return "";
+    }
+
+    // -------------------------- //
+    //     Validation Methods     //
+    // -------------------------- //
+
+
+    public boolean isValidNewRegNumber(String regNumber){
+        for(Vehicle vehicle: vehicles)
+           if (vehicle.getRegNumber().equals(regNumber))
+               return false;
+        return true;
+    }
+
+    // -------------------------- //
+    //     Sorting Methods        //
+    // -------------------------- //
+
+    public void sortByCarbonFootprintDescending(){
+    }
+
+    public void sortByCostDescending(){
+    }
+
+    public void sortByAgeAscending(){
+    }
+
+    public void sortByCarbonFootprintAscending(){
+
+    }
+
+    public void swapVehicles(List<Vehicle> vehicles, int i, int j){
+    }
+
+    // -------------------------- //
+    //     Other Methods          //
+    // -------------------------- //
+    public void topFiveCarbonVehicles(List<Vehicle> vehicles){
+
+    }
+
+    
+    
     //---------------------
     // Persistence methods
     //---------------------
@@ -74,23 +186,15 @@ public class VehicleAPI {
      *
      * @throws Exception An exception is thrown if an error occurred during the save e.g. drive is full.
      */
-//    public void save() throws Exception {
-//        XStream xstream = new XStream(new DomDriver());
-//        ObjectOutputStream out = xstream.createObjectOutputStream(new FileWriter(file));
-//        out.writeObject(vehicles);
-//        out.close();
-//    }
-//
-//    public String fileName(){
-//        return this.file.toString();
-//    }
-
-    public String fileName(){
-        return "";
+    public void save() throws Exception {
+        XStream xstream = new XStream(new DomDriver());
+        ObjectOutputStream out = xstream.createObjectOutputStream(new FileWriter(file));
+        out.writeObject(vehicles);
+        out.close();
     }
 
-    public void save() throws Exception{
-
+    public String fileName(){
+        return this.file.toString();
     }
 
 }
