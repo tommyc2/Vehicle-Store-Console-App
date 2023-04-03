@@ -10,11 +10,11 @@ public abstract class Vehicle {
     String model = "No model";
 
     public Vehicle(String regNumber, String model, float cost, Manufacturer manufacturer, int year) {
-        setRegNumber(regNumber);
+        this.regNumber = Utilities.truncateString(regNumber,8);
         setYear(year);
         setCost(cost);
         this.manufacturer = manufacturer;
-        setModel(model);
+        this.model = Utilities.truncateString(model,15);
     }
 
     public String getRegNumber() {
@@ -22,7 +22,9 @@ public abstract class Vehicle {
     }
 
     public void setRegNumber(String regNumber) {
-        this.regNumber = Utilities.truncateString(regNumber,8);
+        if (regNumber.length() <= 8){
+            this.regNumber = regNumber;
+        }
     }
 
     public int getYear() {
@@ -58,11 +60,8 @@ public abstract class Vehicle {
     }
 
     public void setModel(String model) {
-        if (Utilities.validStringlength(model,15)){
+        if (model.length() <= 15){
             this.model = model;
-        }
-        else{
-            this.model = Utilities.truncateString(model,15);
         }
     }
 

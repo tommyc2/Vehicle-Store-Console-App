@@ -10,7 +10,7 @@ public class Scooter extends Vehicle {
     private int topRiderWeight = 100;
     private float weight = 5;
 
-    public Scooter(String regNumber, String model, float cost, Manufacturer manufacturer, int year, int power, int topRiderWeight, float weight) {
+    public Scooter(String regNumber, String model, float cost, Manufacturer manufacturer, int year, int power, float weight, int topRiderWeight) {
         super(regNumber, model, cost, manufacturer, year);
         setPower(power);
         setWeight(weight);
@@ -41,7 +41,9 @@ public class Scooter extends Vehicle {
     }
 
     public void setWeight(float weight) {
-        this.weight = weight;
+       if (Utilities.validRange(weight,5,100,0.01F)){
+           this.weight = weight;
+       }
     }
     @Override
     public double getCarbonFootPrint() {
@@ -61,7 +63,7 @@ public class Scooter extends Vehicle {
         String superStr = super.toString();
 
         superStr +=
-        "Power: " + this.power + "Top Rider Weight: " + this.topRiderWeight + "Weight: " + this.weight;
+        "Power: " + this.power + "Top Rider Weight: " + this.topRiderWeight + "Weight : " + this.weight + "kg";
 
         return superStr;
     }
