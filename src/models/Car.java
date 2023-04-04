@@ -6,10 +6,10 @@ import java.util.Objects;
 
 public abstract class Car extends Vehicle {
 
-    private int secs0To60 = 4;
-    private int power = 120;
-    private float torque = 100;
-    private int topSpeed = 50;
+    private int secs0To60 = 4; // 4-25
+    private int power = 120; // 120-300
+    private float torque = 100; // 100-400
+    private int topSpeed = 50; // 50-3000
 
     public Car(String regNumber, String model, float cost, Manufacturer manufacturer, int year, int secs0To60, int power, float torque, int topSpeed) {
         super(regNumber, model, cost, manufacturer, year);
