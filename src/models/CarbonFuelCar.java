@@ -59,7 +59,7 @@ public class CarbonFuelCar extends Car {
 
      public void setFuelType(String fuelType) {
          if (FuelTypeUtility.validFuelType(fuelType)){
-             this.fuelType = fuelType;
+             this.fuelType = fuelType.toLowerCase();
          }
      }
 
@@ -83,7 +83,7 @@ public class CarbonFuelCar extends Car {
 
     @Override
      public double getCarbonFootPrint() {
-            return ((this.engineSize)*(getAge()))*(this.fuelConsumption)*(this.carbonEmission) / 2000;
+            return engineSize*getAge()*fuelConsumption*carbonEmission / 2000;
         }
 
 
@@ -91,8 +91,18 @@ public class CarbonFuelCar extends Car {
          String superStr = super.toString();
 
          superStr += " | Engine Size: " + this.engineSize + " Fuel Consumption: " + this.fuelConsumption +
-                 " Carbon Emission: " + this.carbonEmission + "Is it an automatic?: " + this.automatic +
-                 " Fuel Type: " + this.fuelType;
+                 " Carbon Emission: " + this.carbonEmission + "Is it an automatic?: ";
+
+         if (!automatic){
+             superStr += "No ";
+         }
+         else{
+             superStr += "Yes ";
+         }
+
+         superStr += " Fuel Type: " + this.fuelType;
+
+
 
          return superStr;
     }
