@@ -45,13 +45,15 @@ public class ElectricCar extends Car {
 
     @Override
     public double getCarbonFootPrint() {
-        return ((this.engineKWatts)*(getAge())) / 20000;
+        return (engineKWatts*getAge()) / 20000;
+        // engineKWatts * age / 20,000
+
     }
 
     public String toString(){
         String superStr = super.toString();
 
-        superStr += " | Engine Power (kW): " + this.engineKWatts + " Range: " + this.range;
+        superStr += " | Engine Power (kW): " + engineKWatts + " Range: " + this.range;
 
         return superStr;
     }
