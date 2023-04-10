@@ -10,6 +10,6 @@ public class FuelTypeUtility {
     }};
 
     public static boolean validFuelType(String fuelType){
-        return (fuelTypes.contains(fuelType.toLowerCase()));
+        return (fuelTypes.contains(fuelType));
     }
 }

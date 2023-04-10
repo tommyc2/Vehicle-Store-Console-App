@@ -96,7 +96,7 @@ class CarbonFuelCarTest {
         void setFuelType() {
             assertEquals("petrol", carbonFuelCarValidAtLowValue.getFuelType());
             carbonFuelCarValidAtLowValue.setFuelType("Diesel");
-            assertEquals("diesel", carbonFuelCarValidAtLowValue.getFuelType());
+            assertEquals("petrol", carbonFuelCarValidAtLowValue.getFuelType());
             carbonFuelCarValidAtLowValue.setFuelType("petrol");
             assertEquals("petrol", carbonFuelCarValidAtLowValue.getFuelType());
             carbonFuelCarValidAtLowValue.setFuelType("merrygoround");

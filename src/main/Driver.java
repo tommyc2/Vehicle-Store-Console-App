@@ -8,9 +8,6 @@ import utils.ScannerInput;
 import java.io.File;
 
 public class Driver {
-
-
-
         private VehicleAPI vehicleAPI;
         private ManufacturerAPI manufacturerAPI;
 
@@ -20,7 +17,7 @@ public class Driver {
 
         public void start() {
 
-//            vehicleAPI = new VehicleAPI(new File("vehicles.xml"));   //todo - write constructor for VehicleAPi
+            vehicleAPI = new VehicleAPI(new File("vehicles.xml"));
             manufacturerAPI = new ManufacturerAPI(new File("manufacturers.xml"));
 
             loadAllData();  //load all data once the serializers are set up
