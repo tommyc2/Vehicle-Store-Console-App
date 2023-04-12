@@ -161,12 +161,35 @@ public class VehicleAPITest {
             assertEquals(scooterBelowBoundary,foundScooter);
 
             // Testing if updated details go through to separate object
+            assertTrue(populatedVehicles.updateScooter(0,"SCOOT321", "MasterScooter-3", 1000,
+                    kia, 2000, 250, 5, 100));
+            Scooter updatedScooter = (Scooter) populatedVehicles.getVehicleByIndex(0);
+            assertEquals("MasterScooter-3", updatedScooter.getModel());
+            assertEquals(1000, updatedScooter.getCost());
+            assertEquals(kia, updatedScooter.getManufacturer());
+            assertEquals(2000, updatedScooter.getYear());
+            assertEquals(250, updatedScooter.getPower());
+            assertEquals(5, updatedScooter.getWeight());
+            assertEquals(100, updatedScooter.getTopRiderWeight());
 
         }
 
         @Test
         void updateCarbonCarReturnsTrueAndUpdates(){
-
+//            CarbonFuelCar foundCarbonCar = (CarbonFuelCar) populatedVehicles.getVehicleByIndex(0);
+ //           assertEquals(scooterBelowBoundary,foundScooter);
+//
+  //          // Testing if updated details go through to separate object
+    //        assertTrue(populatedVehicles.updateScooter(0,"SCOOT321", "MasterScooter-3", 1000,
+//                    kia, 2000, 250, 5, 100));
+//            Scooter updatedScooter = (Scooter) populatedVehicles.getVehicleByIndex(0);
+//            assertEquals("MasterScooter-3", updatedScooter.getModel());
+//            assertEquals(1000, updatedScooter.getCost());
+//            assertEquals(kia, updatedScooter.getManufacturer());
+//            assertEquals(2000, updatedScooter.getYear());
+//            assertEquals(250, updatedScooter.getPower());
+//            assertEquals(5, updatedScooter.getWeight());
+//            assertEquals(100, updatedScooter.getTopRiderWeight());
         }
 
         @Test
