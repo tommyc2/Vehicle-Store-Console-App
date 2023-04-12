@@ -71,7 +71,7 @@ public class VehicleAPI {
     }
 
     // Update Methods for Electric, Carbon, Scooter //
-
+    // -------------------------------------------- //
     public boolean updateElectricCar(int indexToUpdate, String regNumber, String model, float cost, Manufacturer manufacturer, int year, int power,int secs0To60,int topSpeed, float torque, float engineKWatts, int range ){
         Vehicle updatedElectricCar = getVehicleByIndex(indexToUpdate);
 
@@ -92,14 +92,42 @@ public class VehicleAPI {
         return false;
     }
 
-    public boolean updateCarbonCar(){
-        return false;
-        //todo Update Carbon Car method
+    public boolean updateCarbonCar(int indexToUpdate, String regNumber, String model, float cost, Manufacturer manufacturer, int year, int power, int secs0To60, int topSpeed, float torque,String fuelType, float fuelConsumption, float carbonEmission,int engineSize, boolean automatic){
+       Vehicle updatedCarbonCar = getVehicleByIndex(indexToUpdate);
+
+       if (updatedCarbonCar != null && updatedCarbonCar instanceof CarbonFuelCar){
+           updatedCarbonCar.setRegNumber(regNumber);
+           updatedCarbonCar.setModel(model);
+           updatedCarbonCar.setCost(cost);
+           updatedCarbonCar.setManufacturer(manufacturer);
+           updatedCarbonCar.setYear(year);
+           ((CarbonFuelCar) updatedCarbonCar).setPower(power);
+           ((CarbonFuelCar) updatedCarbonCar).setTorque(torque);
+           ((CarbonFuelCar) updatedCarbonCar).setTopSpeed(topSpeed);
+           ((CarbonFuelCar) updatedCarbonCar).setSecs0To60(secs0To60);
+           updatedCarbonCar.setManufacturer(manufacturer);
+           ((CarbonFuelCar) updatedCarbonCar).setFuelType(fuelType);
+           ((CarbonFuelCar) updatedCarbonCar).setCarbonEmission(carbonEmission);
+           ((CarbonFuelCar) updatedCarbonCar).setFuelConsumption(fuelConsumption);
+           ((CarbonFuelCar) updatedCarbonCar).setEngineSize(engineSize);
+           ((CarbonFuelCar) updatedCarbonCar).setAutomatic(automatic);
+           return true;
+       }
+       return false;
     }
 
-    public boolean updateScooter(){
+    public boolean updateScooter(int indexToUpdate, String regNumber, String model, float cost, Manufacturer manufacturer, int year, int power, float weight, int topRiderWeight){
+        Vehicle updatedScooter = getVehicleByIndex(indexToUpdate);
+
+        if (updatedScooter != null && updatedScooter instanceof Scooter){
+            updatedScooter.setRegNumber(regNumber);
+            updatedScooter.setModel(model);
+            updatedScooter.setCost(cost);
+            updatedScooter.setManufacturer(manufacturer);
+            updatedScooter.setYear(year);
+            return true;
+        }
         return false;
-        //todo Update Scooter method
     }
 
 
