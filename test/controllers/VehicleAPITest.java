@@ -11,13 +11,12 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class VehicleAPITest {
 
     private Scooter scooterBelowBoundary, scooterOnBoundary, scooterAboveBoundary, scooterInvalidData;
-    private ElectricCar electricCarBelowBoundary, electricCarOnBoundary, electricCarAboveBoundary, electricCarInvalidData;
+    private ElectricCar electricCarBelowBoundary, electricCarOnBoundary, electricCarAboveBoundary, electricCarInvalidData, electricCarValidForEmptyArrayList;
     private CarbonFuelCar carbonFuelBelowBoundary, carbonFuelOnBoundary, carbonFuelAboveBoundary, carbonFuelInvalidData;
 
     private Manufacturer ford = new Manufacturer("Ford", 1020);
@@ -61,6 +60,9 @@ public class VehicleAPITest {
 
         electricCarInvalidData = new ElectricCar(null, null, -1,
                 null, -1, -1, -1, -1, -1, -1, -1);
+
+        electricCarValidForEmptyArrayList = new ElectricCar("Elec12345", "Electric 1234567", 1001,
+                tesla, 2001, 121, 5, 51, 101, 41, 101);
 
 
         // Carbon Fuel Car Validation Rules:
@@ -110,6 +112,72 @@ public class VehicleAPITest {
     @Nested
     class CRUDMethods {
 
+        @Test
+        void addVehicleToList() {
+            assertEquals(6, populatedVehicles.numberOfVehicles());
+
+            // Testing Scooter
+            assertTrue(populatedVehicles.addVehicle(scooterOnBoundary));
+            assertEquals(scooterOnBoundary,populatedVehicles.getVehicleByIndex(populatedVehicles.numberOfVehicles()-1));
+
+            // Testing Electric Car
+            assertTrue(populatedVehicles.addVehicle(electricCarAboveBoundary));
+            assertEquals(electricCarAboveBoundary, populatedVehicles.getVehicleByIndex(populatedVehicles.numberOfVehicles()-1));
+
+            // Testing Carbon Car
+            assertTrue(populatedVehicles.addVehicle(carbonFuelBelowBoundary));
+            assertEquals(carbonFuelBelowBoundary,populatedVehicles.getVehicleByIndex(populatedVehicles.numberOfVehicles()-1));
+
+            // Testing empty vehicles array list
+            assertEquals(0, emptyVehicles.numberOfVehicles());
+            assertTrue(emptyVehicles.addVehicle(electricCarValidForEmptyArrayList));
+            assertEquals(electricCarValidForEmptyArrayList, emptyVehicles.getVehicleByIndex(emptyVehicles.numberOfVehicles()-1));
+
+        }
+
+        @Test
+        void deletingVehicleFromListWhenNoneExist(){
+            assertEquals(0, emptyVehicles.numberOfVehicles());
+            assertEquals(6, populatedVehicles.numberOfVehicles());
+
+            assertNull(emptyVehicles.deleteVehicleByIndex(0));
+            assertNull(populatedVehicles.deleteVehicleByIndex(-1));
+            assertNull(populatedVehicles.deleteVehicleByIndex(populatedVehicles.numberOfVehicles()));
+        }
+
+        @Test
+        void deletingVehicleFromListWhenObjectsExist(){
+            assertEquals(0, emptyVehicles.numberOfVehicles());
+            assertEquals(6, populatedVehicles.numberOfVehicles());
+
+            assertEquals(6,populatedVehicles.numberOfVehicles());
+            assertEquals(electricCarOnBoundary,populatedVehicles.deleteVehicleByIndex(1));
+            assertEquals(5,populatedVehicles.numberOfVehicles());
+        }
+
+        @Test
+        void updateScooterReturnsTrueAndUpdates(){
+            Scooter foundScooter = (Scooter) populatedVehicles.getVehicleByIndex(0);
+            assertEquals(scooterBelowBoundary,foundScooter);
+
+            // Testing if updated details go through to separate object
+
+        }
+
+        @Test
+        void updateCarbonCarReturnsTrueAndUpdates(){
+
+        }
+
+        @Test
+        void updateElectricCarReturnsTrueAndUpdates(){
+
+        }
+
+        @Test
+        void updateVehicleThatDoesNotExistReturnsFalse(){
+
+        }
     }
 
     @Nested

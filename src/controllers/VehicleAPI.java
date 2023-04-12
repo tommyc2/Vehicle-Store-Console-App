@@ -376,31 +376,30 @@ public class VehicleAPI {
     //---------------------
     // Persistence methods
     //---------------------
+
     /**
      * The load method uses the XStream component to read all the objects from the xml
      * file stored on the hard disk.  The read objects are loaded into the associated ArrayList
      *
      * @throws Exception An exception is thrown if an error occurred during the load e.g. a missing file.
      */
-//    @SuppressWarnings("unchecked")
-//    public void load() throws Exception {
-//        //list of classes that you wish to include in the serialisation, separated by a comma
-//        Class<?>[] classes = new Class[]{Vehicle.class, Car.class, CarbonFuelCar.class,
-//                                            ElectricCar.class, Scooter.class, Manufacturer.class};
-//
-//        //setting up the xstream object with default security and the above classes
-//        XStream xstream = new XStream(new DomDriver());
-//        XStream.setupDefaultSecurity(xstream);
-//        xstream.allowTypes(classes);
-//
-//        //doing the actual serialisation to an XML file
-//        ObjectInputStream in = xstream.createObjectInputStream(new FileReader(file));
-//        vehicles = (List<Vehicle>) in.readObject();
-//        in.close();
-//    }
 
+    @SuppressWarnings("unchecked")
     public void load() throws Exception {
 
+        //list of classes that you wish to include in the serialisation, separated by a comma
+        Class<?>[] classes = new Class[]{Vehicle.class, Car.class, CarbonFuelCar.class,
+                                            ElectricCar.class, Scooter.class, Manufacturer.class};
+
+        //setting up the xstream object with default security and the above classes
+       XStream xstream = new XStream(new DomDriver());
+        XStream.setupDefaultSecurity(xstream);
+        xstream.allowTypes(classes);
+
+
+        ObjectInputStream in = xstream.createObjectInputStream(new FileReader(file));
+        vehicles = (List<Vehicle>) in.readObject();
+        in.close();
     }
 
     /**
