@@ -189,7 +189,7 @@ public class VehicleAPI {
             }
 
         if (listOfVehicles.equals("")){
-            return "Sorry, no vehicles in the list!";
+            return "No vehicles";
         }
         else{
             return listOfVehicles;
@@ -278,7 +278,7 @@ public class VehicleAPI {
             return vehiclesEqualToGivenYear;
         }
         else{
-            return "Sorry, no vehicles are equal to the year you gave us";
+            return "No vehicles";
         }
 
     }
