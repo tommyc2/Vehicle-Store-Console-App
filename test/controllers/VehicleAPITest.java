@@ -323,6 +323,55 @@ public class VehicleAPITest {
         }
 
         @Test
+        void listAllScootersReturnsScootersStoredWhenArrayListHasScootersStored() {
+            assertEquals(2, populatedVehicles.numberOfScooters());
+            String scooters = populatedVehicles.listAllScooters();
+
+            assertTrue(scooters.contains("SC 12345"));
+            assertTrue(scooters.contains("SCOOT12"));
+        }
+
+        @Test
+        void listAllScootersReturnsNoScootersStoredWhenNoScootersInList() {
+            assertEquals(0, emptyVehicles.numberOfScooters());
+            String scooters = emptyVehicles.listAllScooters();
+
+            assertTrue(scooters.contains("Sorry, no scooters in the list!"));
+        }
+
+        @Test
+        void listAllCarbonFuelCarsReturnsCarbonCarsStoredWhenArrayListHasCarbonCarsStored(){
+            assertEquals(2, populatedVehicles.numberOfCarbonCars());
+            String carbonCars = populatedVehicles.listAllCarbonFuelCars();
+            //checks for objects in the string
+            assertTrue(carbonCars.contains("Car54321"));
+            assertTrue(carbonCars.contains("Car34567"));
+        }
+        @Test
+        void listAllCarbonFuelCarsReturnsNoCarbonCarsStoredWhenNoneStoredInArrayList(){
+            assertEquals(0, emptyVehicles.numberOfCarbonCars());
+            String carbonCars = emptyVehicles.listAllCarbonFuelCars();
+            //checks for objects in the string
+            assertTrue(carbonCars.contains("Sorry, no carbon fuel cars in the list!"));
+        }
+
+        @Test
+        void listAllElectricCarsReturnsElectricCarsStoredWhenArrayListHasElectricCarsStored(){
+            assertEquals(2, populatedVehicles.numberOfElectricCars());
+            String electricCars = populatedVehicles.listAllElectricCars();
+            //checks for objects in the string
+            assertTrue(electricCars.contains("Elec5678"));
+            assertTrue(electricCars.contains("Elec987"));
+        }
+        @Test
+        void listAllElectricCarsReturnsNoElectricCarsStoredWhenArrayListHasNoElectricCarsStored(){
+            assertEquals(0, emptyVehicles.numberOfElectricCars());
+            String electricCars = emptyVehicles.listAllElectricCars();
+            //checks for objects in the string
+            assertTrue(electricCars.contains("Sorry, no electric cars in the list!"));
+        }
+
+        @Test
         void listBySelectedYearReturnsNoVehiclesWhenNoneExistForEnteredYear() {
             assertEquals(6, populatedVehicles.numberOfVehicles());
             String vehicles = populatedVehicles.listAllVehiclesEqualToAGivenYear(2003);
@@ -381,6 +430,21 @@ public class VehicleAPITest {
         void sortByCostDescendingDoesntCrashWhenListIsEmpty() {
             assertEquals(0, emptyVehicles.numberOfVehicles());
             emptyVehicles.sortByCostDescending();
+        }
+    }
+
+    @Nested
+    class ValidationMethods {
+        @Test
+        void isValidRegNumberReturnsTrueWhenRegExists(){
+            assertTrue(populatedVehicles.isValidNewRegNumber("Elec5678"));
+            assertTrue(populatedVehicles.isValidNewRegNumber("Car54321"));
+        }
+
+        @Test
+        void isValidRegNumberReturnsFalseForInvalidReg(){
+            assertFalse(populatedVehicles.isValidNewRegNumber("Elec5678xxx"));
+            assertFalse(populatedVehicles.isValidNewRegNumber("Car54321xxx"));
         }
     }
 
