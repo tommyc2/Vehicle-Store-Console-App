@@ -80,21 +80,22 @@ public class VehicleAPITest {
                 tesla, 2001, 121, 5, 51, 101, "petrol",
                 6, 2, 801, false);
 
-        carbonFuelInvalidData = new CarbonFuelCar(null, null, -1,
+        //TODO Fix issue with null data
+      /*  carbonFuelInvalidData = new CarbonFuelCar(null, null, -1,
                 null, -1, -1, -1, -1, -1, null,
-                -1, -1, -1, false);
+                -1, -1, -1, false); */
 
         //not included - scooterOnBoundary, scooterInvalidData, electricCarAboveBoundary,
         //               carbonFuelBelowBoundary, carbonFuelInvalidData.
-        populatedVehicles.addVehicle(scooterBelowBoundary);     //SCOOT12
-        populatedVehicles.addVehicle(electricCarOnBoundary);    //
-        populatedVehicles.addVehicle(carbonFuelAboveBoundary);  //Car34567
-        populatedVehicles.addVehicle(electricCarBelowBoundary); //MAZ123
-        populatedVehicles.addVehicle(scooterAboveBoundary);     //SC 12345
+        populatedVehicles.addVehicle(scooterBelowBoundary);     //SCOOT12 Year:2000
+        populatedVehicles.addVehicle(electricCarOnBoundary);    // Year:2000
+        populatedVehicles.addVehicle(carbonFuelAboveBoundary);  //Car34567 Year: 2001
+        populatedVehicles.addVehicle(electricCarBelowBoundary); //MAZ123 Year:2020
+        populatedVehicles.addVehicle(scooterAboveBoundary);     //SC 12345 Year:2001
        // populatedVehicles.addVehicle(electricCarInvalidData);   //not added as the reg is null
         // TODO Fix error with null object being added to arraylist
 
-        populatedVehicles.addVehicle(carbonFuelOnBoundary);     //Car54321
+        populatedVehicles.addVehicle(carbonFuelOnBoundary);     //Car54321 Year:2000
     }
 
     @AfterEach
@@ -340,15 +341,16 @@ public class VehicleAPITest {
         }
 
         @Test
-        void listAllCarbonFuelCarsReturnsCarbonCarsStoredWhenArrayListHasCarbonCarsStored(){
+        void listAllCarbonFuelCarsReturnsCarbonCarsStoredWhenArrayListHasCarbonCarsStored() {
             assertEquals(2, populatedVehicles.numberOfCarbonCars());
             String carbonCars = populatedVehicles.listAllCarbonFuelCars();
             //checks for objects in the string
             assertTrue(carbonCars.contains("Car54321"));
             assertTrue(carbonCars.contains("Car34567"));
         }
+
         @Test
-        void listAllCarbonFuelCarsReturnsNoCarbonCarsStoredWhenNoneStoredInArrayList(){
+        void listAllCarbonFuelCarsReturnsNoCarbonCarsStoredWhenNoneStoredInArrayList() {
             assertEquals(0, emptyVehicles.numberOfCarbonCars());
             String carbonCars = emptyVehicles.listAllCarbonFuelCars();
             //checks for objects in the string
@@ -356,15 +358,16 @@ public class VehicleAPITest {
         }
 
         @Test
-        void listAllElectricCarsReturnsElectricCarsStoredWhenArrayListHasElectricCarsStored(){
+        void listAllElectricCarsReturnsElectricCarsStoredWhenArrayListHasElectricCarsStored() {
             assertEquals(2, populatedVehicles.numberOfElectricCars());
             String electricCars = populatedVehicles.listAllElectricCars();
             //checks for objects in the string
             assertTrue(electricCars.contains("Elec5678"));
             assertTrue(electricCars.contains("Elec987"));
         }
+
         @Test
-        void listAllElectricCarsReturnsNoElectricCarsStoredWhenArrayListHasNoElectricCarsStored(){
+        void listAllElectricCarsReturnsNoElectricCarsStoredWhenArrayListHasNoElectricCarsStored() {
             assertEquals(0, emptyVehicles.numberOfElectricCars());
             String electricCars = emptyVehicles.listAllElectricCars();
             //checks for objects in the string
@@ -389,13 +392,97 @@ public class VehicleAPITest {
             assertTrue(vehicles.contains("Car34567"));
             assertTrue(vehicles.contains("SC 12345"));
         }
+
+        @Test
+        void listByVehiclesByManufacturerReturnsVehiclesList() {
+            assertEquals(6, populatedVehicles.numberOfVehicles());
+
+            // Kia
+            String listOfKiaVehicles = populatedVehicles.listAllVehiclesByChosenManufacturer(kia);
+            assertTrue(listOfKiaVehicles.contains("Kia"));
+
+            //Ford
+            String listOfFordVehicles = populatedVehicles.listAllVehiclesByChosenManufacturer(ford);
+            assertTrue(listOfFordVehicles.contains("Ford"));
+
+            //Mazda
+            String listOfMazdaVehicles = populatedVehicles.listAllVehiclesByChosenManufacturer(mazda);
+            assertTrue(listOfMazdaVehicles.contains("Mazda"));
+
+            // Tesla
+            String listOfTeslaVehicles = populatedVehicles.listAllVehiclesByChosenManufacturer(tesla);
+            assertTrue(listOfTeslaVehicles.contains("Tesla"));
+        }
+
+        @Test
+        void listByManufacturerReturnsNoList() {
+            assertEquals(0, emptyVehicles.numberOfVehicles());
+
+            String emptyKiaList = emptyVehicles.listAllVehiclesByChosenManufacturer(kia);
+            String emptyFordList = emptyVehicles.listAllVehiclesByChosenManufacturer(ford);
+            String emptyTeslaList = emptyVehicles.listAllVehiclesByChosenManufacturer(tesla);
+            String emptyMazdaList = emptyVehicles.listAllVehiclesByChosenManufacturer(mazda);
+
+            assertTrue(emptyKiaList.contains("No vehicles match this manufacturer: Kia"));
+            assertTrue(emptyFordList.contains("No vehicles match this manufacturer: Ford"));
+            assertTrue(emptyTeslaList.contains("No vehicles match this manufacturer: Tesla"));
+            assertTrue(emptyMazdaList.contains("No vehicles match this manufacturer: Mazda"));
+
+        }
+
+        @Test
+        void listAllVehiclesAfterGivenYearList() {
+            assertEquals(6, populatedVehicles.numberOfVehicles());
+            String listOfVehiclesPast1999 = populatedVehicles.listAllVehiclesAfterAGivenYear(1999);
+            assertTrue(listOfVehiclesPast1999.contains("23"));
+            assertTrue(listOfVehiclesPast1999.contains("22"));
+            assertTrue(listOfVehiclesPast1999.contains("3"));
+
+            //Checking Invalid Year
+            assertTrue(populatedVehicles.listAllVehiclesAfterAGivenYear(2023).contains("No vehicles exist later than this year: 2023"));
+        }
+
+        @Test
+        void listAllCarbonFuelsByFuelTypeReturnsListOfVehiclesWithFuelType() {
+            assertEquals(6, populatedVehicles.numberOfVehicles());
+            String listOfDiesel = populatedVehicles.listAllCarbonFuelsByFuelType("Diesel");
+            assertTrue(listOfDiesel.contains("diesel"));
+        }
+
+        @Test
+        void listOfCarbonFuelsByFuelTypeReturnsApology() {
+            assertEquals(6, populatedVehicles.numberOfVehicles());
+            String invalidFuelType = populatedVehicles.listAllCarbonFuelsByFuelType("Cat");
+            assertTrue(invalidFuelType.contains("Not a valid fuel type!"));
+        }
+
+        @Test
+        void listOfCarbonFuelsByFuelTypeReturnsNoVehicesStoredWhenArrayListIsEmpty() {
+            assertEquals(0, emptyVehicles.numberOfVehicles());
+            String noVehiclesStored = emptyVehicles.listAllCarbonFuelsByFuelType("rabbit");
+            assertTrue(noVehiclesStored.contains("No vehicles stored as well as invalid fuel type entered:"));
+
+        }
     }
 
+
     @Nested
-    class ReportingMethods {
+    class CountingMethods {
+        @Test
+        void numberOfVehiclesByManufacturerReturnsInt(){
+            // Populated ArrayList
+            assertEquals(2, populatedVehicles.numberOfVehiclesByChosenManufacturer(kia));
+            assertEquals(1, populatedVehicles.numberOfVehiclesByChosenManufacturer(ford));
+            assertEquals(2, populatedVehicles.numberOfVehiclesByChosenManufacturer(tesla));
+            assertEquals(1, populatedVehicles.numberOfVehiclesByChosenManufacturer(mazda));
 
 
-
+            // Empty ArrayList
+            assertEquals(0, emptyVehicles.numberOfVehiclesByChosenManufacturer(kia));
+            assertEquals(0, emptyVehicles.numberOfVehiclesByChosenManufacturer(ford));
+            assertEquals(0, emptyVehicles.numberOfVehiclesByChosenManufacturer(tesla));
+            assertEquals(0, emptyVehicles.numberOfVehiclesByChosenManufacturer(mazda));
+        }
     }
 
     @Nested
@@ -448,7 +535,17 @@ public class VehicleAPITest {
         }
     }
 
+    @Test
+    void testingFileNameReturnsSeparateFileNamesForPopulatedAndEmptyLists(){
+        String fileName = populatedVehicles.fileName();
+        assertEquals("vehicles.xml", fileName.toString());
+
+        String fileName2 = emptyVehicles.fileName();
+        assertEquals("vehiclesempty.xml",fileName2.toString());
+    }
+
 }
+
 
 
 

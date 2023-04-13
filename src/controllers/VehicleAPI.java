@@ -138,21 +138,22 @@ public class VehicleAPI {
 
     public String listAllCarbonFuelsByFuelType(String fuelType){
         String carbonFuelsByType = "";
+
         if (FuelTypeUtility.validFuelType(fuelType)){
             for(Vehicle vehicle : vehicles){
                 if (vehicle instanceof CarbonFuelCar){
-                    if(((CarbonFuelCar) vehicle).getFuelType().equals(fuelType)){
+                    if(((CarbonFuelCar) vehicle).getFuelType().equalsIgnoreCase(fuelType)){
                         carbonFuelsByType += vehicles.indexOf(vehicle) + ": " + vehicle.toString() + "\n";
                     }
                 }
             }
         }
         else{
-            if (!FuelTypeUtility.validFuelType(fuelType)) {
-                return "Not a valid fuel type!";
+            if (vehicles.isEmpty() && !FuelTypeUtility.validFuelType(fuelType)){
+                return "No vehicles stored as well as invalid fuel type entered: " + fuelType;
             }
-            if (vehicles.isEmpty()){
-                return "No vehicles stored";
+            else if (!FuelTypeUtility.validFuelType(fuelType)) {
+                return "Not a valid fuel type!";
             }
         }
         return carbonFuelsByType;
@@ -160,10 +161,8 @@ public class VehicleAPI {
 
     public String listAllVehiclesAfterAGivenYear(int year){
         String listOfVehicles = "";
-        if (isValidIndex(vehicles,year)){
-
             for(Vehicle vehicle : vehicles){
-                if (year > vehicle.getYear()){
+                if (vehicle.getYear() > year){
                     listOfVehicles += vehicles.indexOf(vehicle) + ": " + vehicle.toString() + "\n";
                 }
             }
@@ -172,11 +171,6 @@ public class VehicleAPI {
             return "No vehicles exist later than this year: " + year;
             }
             return listOfVehicles;
-
-        }
-        else{
-            return "Not a valid year";
-        }
     }
 
     public String listAllVehicles(){

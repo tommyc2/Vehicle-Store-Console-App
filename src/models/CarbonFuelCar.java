@@ -91,7 +91,7 @@ public class CarbonFuelCar extends Car {
          String superStr = super.toString();
 
          superStr += " | Engine Size: " + this.engineSize + " Fuel Consumption: " + this.fuelConsumption +
-                 " Carbon Emission: " + this.carbonEmission + "Is it an automatic?: ";
+                 " Carbon Emission: " + this.carbonEmission + " Is it an automatic?: ";
 
          if (!automatic){
              superStr += "No ";
