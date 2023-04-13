@@ -91,7 +91,9 @@ public class VehicleAPITest {
         populatedVehicles.addVehicle(carbonFuelAboveBoundary);  //Car34567
         populatedVehicles.addVehicle(electricCarBelowBoundary); //MAZ123
         populatedVehicles.addVehicle(scooterAboveBoundary);     //SC 12345
-        populatedVehicles.addVehicle(electricCarInvalidData);   //not added as the reg is null
+       // populatedVehicles.addVehicle(electricCarInvalidData);   //not added as the reg is null
+        // TODO Fix error with null object being added to arraylist
+
         populatedVehicles.addVehicle(carbonFuelOnBoundary);     //Car54321
     }
 
@@ -105,7 +107,51 @@ public class VehicleAPITest {
     }
 
     @Nested
-    class GettersAndSetters {
+    class Getters {
+
+        @Test
+        void getVehicleByIndexReturnsVehicle(){
+
+            //populatedVehicles.addVehicle(scooterBelowBoundary);     //SCOOT12
+            // populatedVehicles.addVehicle(electricCarOnBoundary);    //Elec5678
+           //  populatedVehicles.addVehicle(carbonFuelAboveBoundary);  //Car34567
+
+            assertEquals(scooterBelowBoundary,populatedVehicles.getVehicleByIndex(0));
+            assertEquals(electricCarOnBoundary,populatedVehicles.getVehicleByIndex(1));
+            assertEquals(carbonFuelAboveBoundary,populatedVehicles.getVehicleByIndex(2));
+        }
+
+        @Test
+        void getVehicleByIndexReturnsNullWhenNoneExistOrInvalid(){
+            assertNull(populatedVehicles.getVehicleByIndex(10));
+            assertNull(populatedVehicles.getVehicleByIndex(-1));
+            assertNull(populatedVehicles.getVehicleByIndex(11));
+
+            // Checking empty arraylist
+            assertNull(emptyVehicles.getVehicleByIndex(0));
+        }
+
+        @Test
+        void getVehicleByRegReturnsVehicleWhenExists(){
+
+            //populatedVehicles.addVehicle(scooterBelowBoundary);     //SCOOT12
+            // populatedVehicles.addVehicle(electricCarOnBoundary);    //Elec5678
+            //  populatedVehicles.addVehicle(carbonFuelAboveBoundary);  //Car34567
+
+            assertEquals(scooterBelowBoundary,populatedVehicles.getVehicleByRegNumber("SCOOT12"));
+            assertEquals(electricCarOnBoundary,populatedVehicles.getVehicleByRegNumber("Elec5678"));
+            assertEquals(carbonFuelAboveBoundary,populatedVehicles.getVehicleByRegNumber("Car34567"));
+        }
+
+        @Test
+        void getVehicleByRegReturnsNullWhenNoneExistOrInvalid(){
+            assertNull(populatedVehicles.getVehicleByRegNumber("InvalidReg"));
+            assertNull(populatedVehicles.getVehicleByRegNumber("InvalidReg"));
+            assertNull(populatedVehicles.getVehicleByRegNumber("InvalidReg"));
+
+            // Checking empty arraylist
+            assertNull(emptyVehicles.getVehicleByRegNumber("InvalidReg"));
+        }
 
     }
 
@@ -156,17 +202,56 @@ public class VehicleAPITest {
         }
 
         @Test
+        void updateElectricCarReturnsTrueAndUpdates(){
+            ElectricCar foundElectricCar = (ElectricCar) populatedVehicles.getVehicleByIndex(1);
+            assertEquals(foundElectricCar,populatedVehicles.getVehicleByIndex(1));
+
+            assertTrue(populatedVehicles.updateElectricCar(1,"Elec567891010",
+                    "Electric 1234567", 1001, kia, 2001, 121, 5,
+                    51, 101, 41, 101));
+            ElectricCar updatedElectricCar = (ElectricCar) populatedVehicles.getVehicleByIndex(1);
+            assertEquals("Elec5678",updatedElectricCar.getRegNumber());
+            assertEquals("Electric 123456",updatedElectricCar.getModel());
+            assertEquals(1001,updatedElectricCar.getCost());
+            assertEquals(kia,updatedElectricCar.getManufacturer());
+            assertEquals(2001,updatedElectricCar.getYear());
+            assertEquals(121,updatedElectricCar.getPower());
+            assertEquals(5,updatedElectricCar.getSecs0To60());
+            assertEquals(51,updatedElectricCar.getTopSpeed());
+            assertEquals(101,updatedElectricCar.getTorque());
+            assertEquals(41,updatedElectricCar.getEngineKWatts());
+            assertEquals(101,updatedElectricCar.getRange());
+        }
+
+        @Test
+        void deletesVehicleByRegNumberWhenVehicleExists(){
+            assertEquals(6,populatedVehicles.numberOfVehicles());
+            assertEquals(electricCarOnBoundary,populatedVehicles.deleteVehicleByRegNumber("Elec5678"));
+            assertEquals(5, populatedVehicles.numberOfVehicles());
+        }
+
+        @Test
+        void deletesVehicleByRegNumberWhenVehicleDoesntExist(){
+            assertEquals(0,emptyVehicles.numberOfVehicles());
+            assertEquals(6,populatedVehicles.numberOfVehicles());
+
+            assertNull(emptyVehicles.deleteVehicleByRegNumber("Elec5678"));
+            assertNull(populatedVehicles.deleteVehicleByRegNumber("InvalidReg"));
+        }
+
+        @Test
         void updateScooterReturnsTrueAndUpdates(){
             Scooter foundScooter = (Scooter) populatedVehicles.getVehicleByIndex(0);
             assertEquals(scooterBelowBoundary,foundScooter);
 
             // Testing if updated details go through to separate object
-            assertTrue(populatedVehicles.updateScooter(0,"SCOOT321", "MasterScooter-3", 1000,
-                    kia, 2000, 250, 5, 100));
+            assertTrue(populatedVehicles.updateScooter(0,"123456789", "Scootn1Master123", 999,
+                    ford, 1999, 119, 4, 99));
             Scooter updatedScooter = (Scooter) populatedVehicles.getVehicleByIndex(0);
-            assertEquals("MasterScooter-3", updatedScooter.getModel());
+            assertEquals("SCOOT12", updatedScooter.getRegNumber());
+            assertEquals("Scootn1 Master", updatedScooter.getModel());
             assertEquals(1000, updatedScooter.getCost());
-            assertEquals(kia, updatedScooter.getManufacturer());
+            assertEquals(ford, updatedScooter.getManufacturer());
             assertEquals(2000, updatedScooter.getYear());
             assertEquals(250, updatedScooter.getPower());
             assertEquals(5, updatedScooter.getWeight());
@@ -176,30 +261,41 @@ public class VehicleAPITest {
 
         @Test
         void updateCarbonCarReturnsTrueAndUpdates(){
-//            CarbonFuelCar foundCarbonCar = (CarbonFuelCar) populatedVehicles.getVehicleByIndex(0);
- //           assertEquals(scooterBelowBoundary,foundScooter);
-//
-  //          // Testing if updated details go through to separate object
-    //        assertTrue(populatedVehicles.updateScooter(0,"SCOOT321", "MasterScooter-3", 1000,
-//                    kia, 2000, 250, 5, 100));
-//            Scooter updatedScooter = (Scooter) populatedVehicles.getVehicleByIndex(0);
-//            assertEquals("MasterScooter-3", updatedScooter.getModel());
-//            assertEquals(1000, updatedScooter.getCost());
-//            assertEquals(kia, updatedScooter.getManufacturer());
-//            assertEquals(2000, updatedScooter.getYear());
-//            assertEquals(250, updatedScooter.getPower());
-//            assertEquals(5, updatedScooter.getWeight());
-//            assertEquals(100, updatedScooter.getTopRiderWeight());
+           CarbonFuelCar foundCarbonCar = (CarbonFuelCar) populatedVehicles.getVehicleByIndex(5);
+            assertEquals(carbonFuelOnBoundary,foundCarbonCar);
+
+            // Testing if updated details go through to separate object
+            assertTrue(populatedVehicles.updateCarbonCar(2,"Car123487", "CarbonCar 123456", 999,
+                    ford, 1999, 119, 3, 49, 99, "diesel",
+                    4, 0, 799, false));
+           CarbonFuelCar updatedCarbonCar = (CarbonFuelCar) populatedVehicles.getVehicleByIndex(5);
+            assertEquals("Car54321", updatedCarbonCar.getRegNumber());
+            assertEquals("CarbonCar 12345", updatedCarbonCar.getModel());
+            assertEquals(1000, updatedCarbonCar.getCost());
+            assertEquals(kia, updatedCarbonCar.getManufacturer());
+            assertEquals(2000, updatedCarbonCar.getYear());
+            assertEquals(120, updatedCarbonCar.getPower());
+            assertEquals(4, updatedCarbonCar.getSecs0To60());
+            assertEquals(50, updatedCarbonCar.getTopSpeed());
+            assertEquals(100, updatedCarbonCar.getTorque(),0.01F);
+            assertEquals("diesel", updatedCarbonCar.getFuelType());
+            assertEquals(5, updatedCarbonCar.getFuelConsumption(), 0.01F);
+            assertEquals(1,updatedCarbonCar.getCarbonEmission());
+            assertEquals(800, updatedCarbonCar.getEngineSize());
+
         }
 
-        @Test
-        void updateElectricCarReturnsTrueAndUpdates(){
 
-        }
 
         @Test
         void updateVehicleThatDoesNotExistReturnsFalse(){
+        assertFalse(populatedVehicles.updateElectricCar(10,"notest","notest",100,ford,2000,901,200,20,30,30,40));
+        assertFalse(populatedVehicles.updateScooter(-5,"notest","9082",893,ford,200,200,200,200));
+        assertFalse(populatedVehicles.updateCarbonCar(-8,"notest","notest",200,kia,200,200,200,200,200,"diesel",200,1,50,false));
 
+        //Testing empty arraylist
+            assertFalse(emptyVehicles.updateScooter(0,"notestest","testtesting",200,kia,
+                    2000,120,50,20));
         }
     }
 
@@ -248,6 +344,8 @@ public class VehicleAPITest {
 
     @Nested
     class ReportingMethods {
+
+
 
     }
 

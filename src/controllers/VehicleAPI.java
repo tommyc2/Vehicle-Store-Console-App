@@ -338,10 +338,11 @@ public class VehicleAPI {
     // -------------------------- //
 
     public boolean isValidNewRegNumber(String regNumber){
-        for(Vehicle vehicle: vehicles)
-           if (vehicle.getRegNumber().equals(regNumber))
-               return false;
-        return true;
+        for(Vehicle vehicle: vehicles) {
+            if (vehicle.getRegNumber().equals(regNumber))
+                return true;
+        }
+        return false;
     }
 
     // -------------------------- //
