@@ -48,7 +48,7 @@ public class Driver {
             while (option != 0) {
                 switch (option) {
                     case 1-> runManufacturerMenu();
-                   // case 2 -> TODO run the Vehicle Store Menu and the associated methods (your design here)
+                    case 2 -> runVehicleCRUDMenu();
                    // case 3 -> TODO run the Reports Menu and the associated methods (your design here)
                     //case 4 -> TODO run the search Manufacturers menu and associated methods (your design here)
                    // case 5 ->TODO run the search Vehicles menu and associated methods (your design here)
@@ -69,12 +69,45 @@ public class Driver {
             System.exit(0);
         }
 
+        //---------------------------\\
+        //---- Vehicle CRUD Menu -----\\
+        //----------------------------\\
+
+    private int vehicleCRUDMenu() {
+        System.out.println("""
+               --------- Vehicle CRUD Menu --------
+               |  1) Add a vehicle                |
+               |  2) Delete a vehicle             |
+               |  3) Update vehicle details       |
+               |  4) List all vehicles            |
+               |  0) Return to main menu          |
+                ----------------------------------""");
+        return ScannerInput.readNextInt("==>>");
+    }
+
+
+    private void runVehicleCRUDMenu() {
+        int option = vehicleCRUDMenu();
+        while (option != 0) {
+            switch (option) {
+                case 1 -> addVehicle();
+        //todo        case 2 -> deleteVehicle();
+        //todo        case 3 -> updateVehicle();
+         //todo      case 4 -> listALlVehicles();
+                default ->  System.out.println("Invalid option entered" + option);
+            }
+            ScannerInput.readNextLine("\n Press the enter key to continue");
+            option = vehicleCRUDMenu();
+        }
+        mainMenu();
+    }
+
         //----------------------
         //  Developer Menu Items
         //----------------------
         private int manufacturerMenu() {
             System.out.println("""
-                --------Manufacturer Menu---------
+                --------Manufacturer CRUD Menu---------
                |  1) Add a manufacturer           |
                |  2) Delete a manufacturer        |
                |  3) Update manufacturer details  |
@@ -94,7 +127,6 @@ public class Driver {
                     case 3 -> updateManufacturer();
                     case 4 -> System.out.println(manufacturerAPI.listManufacturers());
                     case 5-> findManufacturer();
-                    case 6-> listVehiclesByManufacturerName();
                     default->  System.out.println("Invalid option entered" + option);
                 }
                 ScannerInput.readNextLine("\n Press the enter key to continue");
@@ -236,7 +268,7 @@ public class Driver {
                  ---------------------------------------------------  """);
         return ScannerInput.readNextInt("==>>");
     }
-    public void runManufacturerReports() {
+    private void runManufacturerReports() {
         int option = manufacturerReportsMenu();
         while (option != 0) {
             switch (option) {
@@ -251,7 +283,7 @@ public class Driver {
     }
 
 
-    public void listAllVehiclesFromaGivenManufacturer() {
+    private void listAllVehiclesFromaGivenManufacturer() {
         String manu  = ScannerInput.readNextLine("What manufacturer you want a list of cars for?  : ");
         Manufacturer m = manufacturerAPI.getManufacturerByName(manu);
         if (!(m == null))
@@ -260,7 +292,7 @@ public class Driver {
             System.out.println("No manufacturer with tha name exists");
     }
 
-    public void listAllManufacturersByInputtedName(){
+    private void listAllManufacturersByInputtedName(){
             String manufacturerName = ScannerInput.readNextLine("Type in a manufacturer name for similar/exact names: ");
             System.out.println(manufacturerAPI.listAllManufacturersByManufacturerName(manufacturerName));
     }
