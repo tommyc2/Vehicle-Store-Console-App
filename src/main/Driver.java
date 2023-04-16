@@ -138,12 +138,12 @@ public class Driver {
         }
 
         private void findManufacturer(){
-            Manufacturer developer = getManufacturerByName();
-            if (developer == null){
+            Manufacturer manu = getManufacturerByName();
+            if (manu == null){
                 System.out.println("No such manufacturer exists");
             }
             else{
-                System.out.println(developer);
+                System.out.println(manu);
             }
         }
 
@@ -205,7 +205,7 @@ public class Driver {
 //            }
      }
 
-        private void deleteApp(){
+        private void deleteVehicle(){
             //todo
         }
 
