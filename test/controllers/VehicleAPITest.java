@@ -1,15 +1,14 @@
 package controllers;
 
-import models.CarbonFuelCar;
-import models.ElectricCar;
-import models.Manufacturer;
-import models.Scooter;
+import models.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -486,12 +485,7 @@ public class VehicleAPITest {
     }
 
     @Nested
-    class SearchingMethods {
-
-    }
-
-    @Nested
-    class SortingMethods {
+    class SortingAndSwappingMethods {
 
         @Test
         void sortByCostDescendingReOrdersList() {
@@ -517,6 +511,23 @@ public class VehicleAPITest {
         void sortByCostDescendingDoesntCrashWhenListIsEmpty() {
             assertEquals(0, emptyVehicles.numberOfVehicles());
             emptyVehicles.sortByCostDescending();
+        }
+
+        @Test
+        void swappingVehiclesSwapsVehiclesAtIndexesNamed(){
+        assertEquals(6, populatedVehicles.numberOfVehicles());
+
+          //    0: populatedVehicles.addVehicle(scooterBelowBoundary);
+         //     1: populatedVehicles.addVehicle(electricCarOnBoundary);
+
+        assertEquals(populatedVehicles.getVehicleByIndex(0), scooterBelowBoundary);
+        assertEquals(populatedVehicles.getVehicleByIndex(1), electricCarOnBoundary);
+        //TODO fix swapping algorithm test issue
+      //  populatedVehicles.swapVehicles(List<Vehicle> populatedVehicles,0,1);
+
+        assertEquals(populatedVehicles.getVehicleByIndex(1), scooterBelowBoundary);
+        assertEquals(populatedVehicles.getVehicleByIndex(0), electricCarOnBoundary);
+
         }
     }
 

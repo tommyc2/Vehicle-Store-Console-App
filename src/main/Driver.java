@@ -20,7 +20,7 @@ public class Driver {
             vehicleAPI = new VehicleAPI(new File("vehicles.xml"));
             manufacturerAPI = new ManufacturerAPI(new File("manufacturers.xml"));
 
-            loadAllData();  //load all data once the serializers are set up
+            loadAllData();
             runMainMenu();
         }
 
@@ -147,13 +147,6 @@ public class Driver {
             }
         }
 
-        private void listVehiclesByManufacturerName(){
-            String manufacturer = ScannerInput.readNextLine("Enter the manufacturer's name:  ");
-
-            System.out.println(manufacturerAPI.listAllVehiclesByManufacturerName(manufacturer));
-        }
-
-
         //---------------------
         //  Vehicle Menu
         //---------------------
@@ -237,7 +230,7 @@ public class Driver {
         System.out.println(""" 
                 ---------- Manufacturers Reports Menu  -------------
                | 1) List Manufacturers                              | 
-               | 2) List Manufacturers from a given manufacturer    |
+               | 2) List all vehicles from a given manufacturer     |
                | 3) List Manufacturers by a given name              |
                | 0) Return to main menu                             | 
                  ---------------------------------------------------  """);
@@ -248,8 +241,8 @@ public class Driver {
         while (option != 0) {
             switch (option) {
                 case 1-> System.out.println(manufacturerAPI.listManufacturers());
-  //              case 2-> listAllVehiclesFromaGivenManufacturer();   todo write listAllVehiclesFromaGivenManufacturer
-                case 3-> System.out.println("todo");
+                case 2-> listAllVehiclesFromaGivenManufacturer();
+                case 3-> listAllManufacturersByInputtedName();
                 default->  System.out.println("Invalid option entered" + option);
             }
             ScannerInput.readNextLine("\n Press the enter key to continue");
@@ -258,15 +251,19 @@ public class Driver {
     }
 
 
-//    public void listAllVehiclesFromaGivenManufacturer() {
-//        String manu  = ScannerInput.readNextLine("What manufacturer you want a list of cars for?  : ");
-//        Manufacturer m = manufacturerAPI.getManufacturerByName(manu);
-//        if (!(m == null))
-//        System.out.println(vehicleAPI.listAllVehicleByChosenManufacturer(m));     todo write listAllVehicleByChosenManufacturer()
-//        else
-//            System.out.println("No manufacturer with tha name exists");
-//    }
+    public void listAllVehiclesFromaGivenManufacturer() {
+        String manu  = ScannerInput.readNextLine("What manufacturer you want a list of cars for?  : ");
+        Manufacturer m = manufacturerAPI.getManufacturerByName(manu);
+        if (!(m == null))
+        System.out.println(vehicleAPI.listAllVehiclesByChosenManufacturer(m));
+        else
+            System.out.println("No manufacturer with tha name exists");
+    }
 
+    public void listAllManufacturersByInputtedName(){
+            String manufacturerName = ScannerInput.readNextLine("Type in a manufacturer name for similar/exact names: ");
+            System.out.println(manufacturerAPI.listAllManufacturersByManufacturerName(manufacturerName));
+    }
 
     //--------------------------------------------------
     //  Persistence Menu Items
@@ -282,15 +279,15 @@ public class Driver {
         // TODO try-catch to load the apps in the store from XML file
     }
 
-//    private String getValidRegNumber(){
-//            String vehicleRegNumber = ScannerInput.readNextLine("\tVehicle Reg Number (must be unique): ");
-//            if (vehicleAPI.isValidNewRegNumber(vehicleRegNumber)) {
-//                return vehicleRegNumber;
-//            } else {
-//                System.err.println("\tApp name already exists / is not valid.");
-//                return "";
-//            }
-//        }
+    private String getValidRegNumber(){
+            String vehicleRegNumber = ScannerInput.readNextLine("\tVehicle Reg Number (must be unique): ");
+            if (vehicleAPI.isValidNewRegNumber(vehicleRegNumber)) {
+                return vehicleRegNumber;
+            } else {
+               System.err.println("\tReg name already exists / is not valid.");
+                return "";
+            }
+        }
 
         private Manufacturer getManufacturerByName(){
             String manufacturerName = ScannerInput.readNextLine("Please enter the manufacturer's name: ");

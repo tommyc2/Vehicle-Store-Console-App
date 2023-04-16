@@ -7,6 +7,7 @@ import utils.Utilities;
 
 import java.io.*;
 import java.util.*;
+import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -22,7 +23,7 @@ public class VehicleAPI {
         vehicles = new ArrayList<>();
     }
 
-    // todo implements Serializer {   (when load and saved written, include the 'implements Serializer here)
+    //todo implements Serializer {   (when load and saved written, include the 'implements Serializer here)
 
 
     // -------------------------- //
@@ -344,12 +345,16 @@ public class VehicleAPI {
     // -------------------------- //
 
     public void sortByCarbonFootprintDescending(){
+
     }
 
     public void sortByCostDescending(){
     }
 
     public void sortByAgeAscending(){
+        for (int i = vehicles.size() - 1 ; i >=0; i--){
+            int largestIndex = 0;
+        }
     }
 
     public void sortByCarbonFootprintAscending(){
@@ -357,6 +362,11 @@ public class VehicleAPI {
     }
 
     public void swapVehicles(List<Vehicle> vehicles, int i, int j){
+        Vehicle vehicleI = vehicles.get(i);
+        Vehicle vehicleJ = vehicles.get(j);
+
+        vehicles.set(i,vehicleJ);
+        vehicles.set(j,vehicleI);
     }
 
     // -------------------------- //
