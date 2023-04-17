@@ -23,8 +23,9 @@ public class VehicleAPI {
         vehicles = new ArrayList<>();
     }
 
-    //todo implements Serializer {   (when load and saved written, include the 'implements Serializer here)
-
+    public List<Vehicle> getVehicleArrayList(){
+        return vehicles;
+    }
 
     // -------------------------- //
     // CRUD ON Vehicles ArrayList //
@@ -126,6 +127,9 @@ public class VehicleAPI {
             updatedScooter.setCost(cost);
             updatedScooter.setManufacturer(manufacturer);
             updatedScooter.setYear(year);
+            ((Scooter) updatedScooter).setPower(power);
+            ((Scooter) updatedScooter).setWeight(weight);
+            ((Scooter) updatedScooter).setTopRiderWeight(topRiderWeight);
             return true;
         }
         return false;

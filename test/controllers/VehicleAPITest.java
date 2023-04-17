@@ -522,9 +522,11 @@ public class VehicleAPITest {
 
         assertEquals(populatedVehicles.getVehicleByIndex(0), scooterBelowBoundary);
         assertEquals(populatedVehicles.getVehicleByIndex(1), electricCarOnBoundary);
-        //TODO fix swapping algorithm test issue
-      //  populatedVehicles.swapVehicles(List<Vehicle> populatedVehicles,0,1);
 
+        // Swapping mechanism
+        populatedVehicles.swapVehicles(populatedVehicles.getVehicleArrayList(),0,1);
+
+        // Officially swapped objects to different indexes
         assertEquals(populatedVehicles.getVehicleByIndex(1), scooterBelowBoundary);
         assertEquals(populatedVehicles.getVehicleByIndex(0), electricCarOnBoundary);
 

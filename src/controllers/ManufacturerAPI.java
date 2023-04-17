@@ -12,7 +12,7 @@ import utils.Serializer;
 
 import static utils.Utilities.isValidIndex;
 
-public class ManufacturerAPI  implements Serializer {
+public class ManufacturerAPI implements Serializer {
 
     private List<Manufacturer> manufacturers = new ArrayList<>();
 
