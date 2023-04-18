@@ -9,7 +9,7 @@ public class ElectricCar extends Car {
     private int range = 100;
     private float engineKWatts = 40;
 
-    public ElectricCar(String regNumber, String model, float cost, Manufacturer manufacturer, int year, int power,int secs0To60,int topSpeed, float torque, float engineKWatts, int range ) {
+    public ElectricCar(String regNumber, String model, float cost, Manufacturer manufacturer, int year, int power,int secs0To60,int topSpeed, float torque, float engineKWatts, int range) {
         super(regNumber, model, cost, manufacturer, year, secs0To60, power, torque, topSpeed);
         setRange(range);
         setEngineKWatts((engineKWatts));

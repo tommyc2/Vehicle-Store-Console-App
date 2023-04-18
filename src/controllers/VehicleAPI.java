@@ -394,7 +394,7 @@ public class VehicleAPI {
      */
 
     @SuppressWarnings("unchecked")
-    public void load() throws Exception {
+    public void loadVehicles() throws Exception {
 
         //list of classes that you wish to include in the serialisation, separated by a comma
         Class<?>[] classes = new Class[]{Vehicle.class, Car.class, CarbonFuelCar.class,
@@ -417,7 +417,7 @@ public class VehicleAPI {
      *
      * @throws Exception An exception is thrown if an error occurred during the save e.g. drive is full.
      */
-    public void save() throws Exception {
+    public void saveVehicles() throws Exception {
         XStream xstream = new XStream(new DomDriver());
         ObjectOutputStream out = xstream.createObjectOutputStream(new FileWriter(file));
         out.writeObject(vehicles);

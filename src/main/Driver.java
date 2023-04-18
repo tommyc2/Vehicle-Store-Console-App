@@ -97,7 +97,7 @@ public class Driver {
             switch (option) {
                 case 1 -> addVehicle();
                 case 2 -> deleteVehicle();
-        //todo  case 3 -> updateVehicleMenu();
+                case 3 -> runUpdateMenu();
                 case 4 -> listALlVehicles();
                 default ->  System.out.println("Invalid option entered" + option);
             }
@@ -113,10 +113,14 @@ public class Driver {
 
     private void addVehicle(){
         int vehicleType =  ScannerInput.readNextInt("""
-            Which type of vehicle do you wish to add? 
-            1) Carbon Fuel Car
-            2) Electric Car
-            3) Scooter """);
+            ---------------------------------------------
+            | Which type of vehicle do you wish to add? |
+            ---------------------------------------------
+            | 1) Carbon Fuel Car                        |
+            | 2) Electric Car                           |
+            | 3) Scooter                                |
+            ---------------------------------------------
+            """);
 
         String manuName = ScannerInput.readNextLine("Enter manufacturer name:  ");
         int numOfEmployees = ScannerInput.readNextInt("Enter the no. of employees for the manufacturer:  ");
@@ -144,16 +148,35 @@ public class Driver {
                                 String fuelType = ScannerInput.readNextLine("\tEnter valid fuel type (e.g. petrol, diesel):  ");
                                 int engineSize = ScannerInput.readNextInt("\tEnter engine size");
 
-                                //   boolean carbonCarAdded = vehicleAPI.addVehicle(new CarbonFuelCar(regNumber,model,cost,manufacturer,
-                                //     ));
+                                // public CarbonFuelCar(String regNumber, String model, float cost, Manufacturer manufacturer, int year,
+                                // int power, int secs0To60, int topSpeed, float torque,String fuelType, float fuelConsumption,
+                                // float carbonEmission,int engineSize, boolean automatic)
+                                boolean carbonCarAdded = vehicleAPI.addVehicle(new CarbonFuelCar(regNumber,model,cost,
+                                        manufacturer,year,power,secs0To60,topSpeed,torque,fuelType,fuelConsumption,carbonEmission,engineSize,automatic));
+                                if (carbonCarAdded){
+                                    System.out.println("Carbon car added successfully!");
+                                }
+                                else{
+                                    System.out.println("Carbon car not added");
+                                }
                             }
                             case 2 -> {
                                 // Electric Car
                                 int range = ScannerInput.readNextInt("\trange: ");
                                 float engineKWatts = ScannerInput.readNextFloat("\tengine power (kilowatts): ");
 
-                                //   boolean electricCarAdded = vehicleAPI.addVehicle(new CarbonFuelCar(regNumber,model,cost,manufacturer,
-                                //     ));
+
+                                // public ElectricCar(String regNumber, String model, float cost, Manufacturer manufacturer,
+                                // int year, int power,int secs0To60,int topSpeed, float torque, float engineKWatts, int range )
+                                   boolean electricCarAdded = vehicleAPI.addVehicle(new ElectricCar(regNumber,model,cost,manufacturer
+                                           ,year,power,secs0To60,topSpeed,torque,engineKWatts,range));
+
+                                if (electricCarAdded){
+                                    System.out.println("Electric car added successfully!");
+                                }
+                                else{
+                                    System.out.println("Electric car not added");
+                                }
                             }
                         }
                     }
@@ -523,6 +546,8 @@ public class Driver {
     private void saveAllData() {
         // TODO try-catch to save the developers to XML file
         // TODO try-catch to save the apps in the store to XML file
+
+
     }
 
     private void loadAllData() {
