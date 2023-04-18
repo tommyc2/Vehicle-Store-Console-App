@@ -540,41 +540,80 @@ public class Driver {
     }
 
     //--------------------------------------------------
+    //  Valid Reg Number & getManuByName
+    //--------------------------------------------------
+    private String getValidRegNumber(){
+        String vehicleRegNumber = ScannerInput.readNextLine("\tVehicle Reg Number (must be unique): ");
+        if (vehicleAPI.isValidNewRegNumber(vehicleRegNumber)) {
+            return vehicleRegNumber;
+        } else {
+            System.err.println("\tReg name already exists / is not valid.");
+            return "";
+        }
+    }
+
+    private Manufacturer getManufacturerByName(){
+        String manufacturerName = ScannerInput.readNextLine("Please enter the manufacturer's name: ");
+        if (manufacturerAPI.isValidManufacturer(manufacturerName)){
+            return manufacturerAPI.getManufacturerByName(manufacturerName);
+        }
+        else{
+            return null;
+        }
+    }
+    //--------------------------------------------------
     //  Persistence Menu Items
     //--------------------------------------------------
 
     private void saveAllData() {
-        // TODO try-catch to save the developers to XML file
-        // TODO try-catch to save the apps in the store to XML file
+        // Try catch for saving manufacturers to manufacturers.xml
+        try {
+            System.out.println("Saving manufacturers to: " + vehicleAPI.fileName());
+            System.out.print("..");
+            System.out.print(".");
+            System.out.println(".");
+            vehicleAPI.save();
+        } catch (Exception error) {
+            System.err.println("Error writing to this file: " + error);
+        }
 
+        // Try catch for saving vehicles to vehicles.xml
+        try {
+            System.out.print("Saving vehicles to \"vehicles.xml\"");
+            System.out.print("..");
+            System.out.print(".");
+            System.out.println(".");
+            vehicleAPI.save();
+        } catch (Exception e) {
+            System.err.println("Error writing to this file: " + e);
+        }
 
     }
 
     private void loadAllData() {
-        // TODO try-catch to load the developers from XML file
-        // TODO try-catch to load the apps in the store from XML file
+
+        // try-catch to load the manufacturers from XML file
+        try {
+            System.out.print("Loading manufacturers from: " + vehicleAPI.fileName());
+            System.out.print("..");
+            System.out.print(".");
+            System.out.println(".");
+            vehicleAPI.save();
+        } catch (Exception e) {
+            System.err.println("Error writing to this file: " + e);
+        }
+
+        //try-catch to load the vehicles in the store from XML file
+        try {
+            System.out.print("Loading vehicles from: "+ vehicleAPI.fileName());
+            System.out.print("..");
+            System.out.print(".");
+            System.out.println(".");
+            vehicleAPI.save();
+        } catch (Exception e) {
+            System.err.println("Error writing to this file: " + e);
+        }
     }
-
-    private String getValidRegNumber(){
-            String vehicleRegNumber = ScannerInput.readNextLine("\tVehicle Reg Number (must be unique): ");
-            if (vehicleAPI.isValidNewRegNumber(vehicleRegNumber)) {
-                return vehicleRegNumber;
-            } else {
-               System.err.println("\tReg name already exists / is not valid.");
-                return "";
-            }
-        }
-
-        private Manufacturer getManufacturerByName(){
-            String manufacturerName = ScannerInput.readNextLine("Please enter the manufacturer's name: ");
-            if (manufacturerAPI.isValidManufacturer(manufacturerName)){
-                return manufacturerAPI.getManufacturerByName(manufacturerName);
-            }
-            else{
-                return null;
-            }
-        }
-
 
     }
 
