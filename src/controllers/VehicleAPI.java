@@ -182,9 +182,7 @@ public class VehicleAPI {
         String listOfVehicles = "";
 
         for(Vehicle vehicle : vehicles) {
-            if (vehicle != null) {
                 listOfVehicles += vehicles.indexOf(vehicle) + ": " + vehicle.toString() + "\n";
-            }
             }
 
         if (listOfVehicles.equals("")){
@@ -339,9 +337,9 @@ public class VehicleAPI {
     public boolean isValidNewRegNumber(String regNumber){
         for(Vehicle vehicle: vehicles) {
             if (vehicle.getRegNumber().equals(regNumber))
-                return true;
+                return false;
         }
-        return false;
+        return true;
     }
 
     // -------------------------- //

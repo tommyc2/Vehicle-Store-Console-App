@@ -34,7 +34,8 @@ public class Driver {
                          -------Vehicle Store-------------
                         |  1) Manufacturer CRUD MENU     |
                         |  2) Vehicle Store CRUD MENU    |
-                        |  3) Reports MENU               |
+                        |  3) Vehicle Reports MENU       |
+                        |  4) Manufacturers Reports MENU |
                         |--------------------------------|
                         |  4) Search Manufacturers       |
                         |  5) Search Vehicles            |  
@@ -54,10 +55,9 @@ public class Driver {
                 switch (option) {
                     case 1-> runManufacturerMenu();
                     case 2 -> runVehicleCRUDMenu();
-                   // case 3 -> TODO run the Reports Menu and the associated methods (your design here)
-                    //case 4 -> TODO run the search Manufacturers menu and associated methods (your design here)
-                   // case 5 ->TODO run the search Vehicles menu and associated methods (your design here)
-                    // case 6 ->TODO sorting menu and associated (your design here)
+                    case 3 -> vehicleReportsMenu();
+                    case 4 -> runManufacturerReports();
+                 //   case 6 -> //TODO sorting menu and associated (your design here)
                     case 10 -> saveAllData();
                     case 11 -> loadAllData();
                     default ->  System.out.println("Invalid option entered" + option);
@@ -122,88 +122,101 @@ public class Driver {
             ---------------------------------------------
             """);
 
-        String manuName = ScannerInput.readNextLine("Enter manufacturer name:  ");
-        int numOfEmployees = ScannerInput.readNextInt("Enter the no. of employees for the manufacturer:  ");
+        // ------------------------------------------------- //
+          // ----- Tested this way but back tracked ----- //
+       // ------------------------------------------------- //\
 
-        Manufacturer manufacturer = new Manufacturer(manuName,numOfEmployees);
-        if (manufacturer != null){
-            String regNumber = ScannerInput.readNextLine("Please enter Reg number of new Vehicle: ");
+      //  if (!manufacturerAPI.listManufacturers().equals("")){
+  //          System.out.println(manufacturerAPI.listManufacturers());
+  //          int option = ScannerInput.readNextInt("Choose a manufacturer from the list above (type in name correctly):  ");
 
-            if (vehicleAPI.isValidNewRegNumber(regNumber)){
-                String  model = ScannerInput.readNextLine("\tmodel : ");
-                float cost = ScannerInput.readNextFloat("\tcost : ");
-                int  year = ScannerInput.readNextInt("\tYear of registration");
-                switch (vehicleType) {
-                    case 1, 2 -> {
-                        int power = ScannerInput.readNextInt("\tpower : ");
-                        int secs0To60 = ScannerInput.readNextInt("\ttime from 0 to 60 :  ");
-                        int topSpeed = ScannerInput.readNextInt("\ttop speed : ");
-                        float torque = ScannerInput.readNextFloat("\tpower: ");
-                        switch (vehicleType) {
-                            case 1-> {
-                                // Carbon car
-                                float fuelConsumption = ScannerInput.readNextFloat("\tEnter fuel consumption:  ");
-                                float carbonEmission = ScannerInput.readNextFloat("\tEnter carbon emission:  ");
-                                boolean automatic = false;
-                                String fuelType = ScannerInput.readNextLine("\tEnter valid fuel type (e.g. petrol, diesel):  ");
-                                int engineSize = ScannerInput.readNextInt("\tEnter engine size");
+ //           if(manufacturerAPI.getManufacturerByIndex(option) != null){
+ //              Manufacturer manuPreviouslyAdded = manufacturerAPI.getManufacturerByIndex(option);
+  //          }
+ //       }
 
-                                // public CarbonFuelCar(String regNumber, String model, float cost, Manufacturer manufacturer, int year,
-                                // int power, int secs0To60, int topSpeed, float torque,String fuelType, float fuelConsumption,
-                                // float carbonEmission,int engineSize, boolean automatic)
-                                boolean carbonCarAdded = vehicleAPI.addVehicle(new CarbonFuelCar(regNumber,model,cost,
-                                        manufacturer,year,power,secs0To60,topSpeed,torque,fuelType,fuelConsumption,carbonEmission,engineSize,automatic));
-                                if (carbonCarAdded){
-                                    System.out.println("Carbon car added successfully!");
-                                }
-                                else{
-                                    System.out.println("Carbon car not added");
-                                }
-                            }
-                            case 2 -> {
-                                // Electric Car
-                                int range = ScannerInput.readNextInt("\trange: ");
-                                float engineKWatts = ScannerInput.readNextFloat("\tengine power (kilowatts): ");
+           String manuName = ScannerInput.readNextLine("Enter manufacturer name:  ");
+           int numOfEmployees = ScannerInput.readNextInt("Enter the no. of employees for the manufacturer:  ");
+
+           Manufacturer manufacturer = new Manufacturer(manuName, numOfEmployees);
+
+           if (manufacturer != null) {
+               String regNumber = ScannerInput.readNextLine("Please enter Reg number of new Vehicle: ");
+
+               if (vehicleAPI.isValidNewRegNumber(regNumber)) {
+                   String model = ScannerInput.readNextLine("\tmodel : ");
+                   float cost = ScannerInput.readNextFloat("\tcost : ");
+                   int year = ScannerInput.readNextInt("\tYear of registration:  ");
+                   switch (vehicleType) {
+                       case 1, 2 -> {
+                           int power = ScannerInput.readNextInt("\tpower : ");
+                           int secs0To60 = ScannerInput.readNextInt("\ttime from 0 to 60 :  ");
+                           int topSpeed = ScannerInput.readNextInt("\ttop speed : ");
+                           float torque = ScannerInput.readNextFloat("\tpower: ");
+                           switch (vehicleType) {
+                               case 1 -> {
+                                   // Carbon car
+                                   float fuelConsumption = ScannerInput.readNextFloat("\tEnter fuel consumption:  ");
+                                   float carbonEmission = ScannerInput.readNextFloat("\tEnter carbon emission:  ");
+                                   boolean automatic = false;
+                                   String fuelType = ScannerInput.readNextLine("\tEnter valid fuel type (e.g. petrol, diesel):  ");
+                                   int engineSize = ScannerInput.readNextInt("\tEnter engine size:  ");
+
+                                   // public CarbonFuelCar(String regNumber, String model, float cost, Manufacturer manufacturer, int year,
+                                   // int power, int secs0To60, int topSpeed, float torque,String fuelType, float fuelConsumption,
+                                   // float carbonEmission,int engineSize, boolean automatic)
+                                   boolean carbonCarAdded = vehicleAPI.addVehicle(new CarbonFuelCar(regNumber, model, cost,
+                                           manufacturer, year, power, secs0To60, topSpeed, torque, fuelType, fuelConsumption, carbonEmission, engineSize, automatic));
+                                   if (carbonCarAdded) {
+                                       System.out.println("Carbon car added successfully!");
+                                   } else {
+                                       System.out.println("Carbon car not added");
+                                   }
+                               }
+                               case 2 -> {
+                                   // Electric Car
+                                   int range = ScannerInput.readNextInt("\trange: ");
+                                   float engineKWatts = ScannerInput.readNextFloat("\tengine power (kilowatts): ");
 
 
-                                // public ElectricCar(String regNumber, String model, float cost, Manufacturer manufacturer,
-                                // int year, int power,int secs0To60,int topSpeed, float torque, float engineKWatts, int range )
-                                   boolean electricCarAdded = vehicleAPI.addVehicle(new ElectricCar(regNumber,model,cost,manufacturer
-                                           ,year,power,secs0To60,topSpeed,torque,engineKWatts,range));
+                                   // public ElectricCar(String regNumber, String model, float cost, Manufacturer manufacturer,
+                                   // int year, int power,int secs0To60,int topSpeed, float torque, float engineKWatts, int range )
+                                   boolean electricCarAdded = vehicleAPI.addVehicle(new ElectricCar(regNumber, model, cost, manufacturer
+                                           , year, power, secs0To60, topSpeed, torque, engineKWatts, range));
 
-                                if (electricCarAdded){
-                                    System.out.println("Electric car added successfully!");
-                                }
-                                else{
-                                    System.out.println("Electric car not added");
-                                }
-                            }
-                        }
-                    }
-                    case 3 -> {
-                        //Scooter
-                        int power = ScannerInput.readNextInt("\tpower : ");
-                        float weight = ScannerInput.readNextFloat("\tweight : ");
-                        int topRiderWeight = ScannerInput.readNextInt("\ttop rider weight");
-                        boolean scooterAdded = vehicleAPI.addVehicle(new Scooter(regNumber, model, cost, manufacturer, year, power, weight,topRiderWeight));
+                                   if (electricCarAdded) {
+                                       System.out.println("Electric car added successfully!");
+                                   } else {
+                                       System.out.println("Electric car not added");
+                                   }
+                               }
+                           }
+                       }
+                       case 3 -> {
+                           //Scooter
+                           int power = ScannerInput.readNextInt("\tpower : ");
+                           float weight = ScannerInput.readNextFloat("\tweight : ");
+                           int topRiderWeight = ScannerInput.readNextInt("\ttop rider weight");
+                           boolean scooterAdded = vehicleAPI.addVehicle(new Scooter(regNumber, model, cost, manufacturer, year, power, weight, topRiderWeight));
 
-                        if (scooterAdded){
-                            System.out.println("Scooter added successfully");
-                        }
-                        else{
-                            System.out.println("Scooter not added, please try again");
-                        }
-                    }
-                }
-            }
-            else{
-                System.out.println("Vehicle reg number  already exists.");
-            }
-        }
+                           if (scooterAdded) {
+                               System.out.println("Scooter added successfully");
+                           } else {
+                               System.out.println("Scooter not added, please try again");
+                           }
+                       }
+                   }
+               } else {
+                   System.out.println("Vehicle reg number  already exists.");
+               }
+           }
 
-        else{
-            System.out.println("Manufacturer name is NOT valid");
-        }
+           else{
+               System.out.println("Manufacturer name is NOT valid");
+           }
+
+
+
     }
 
     private void deleteVehicle(){
@@ -228,7 +241,7 @@ public class Driver {
                |  1) Update Scooter               |
                |  2) Update Carbon Fuel Car       |
                |  3) Update Electric Car          |
-               |  0) Return to vehicle CRUD Menu  |
+               |  0) Return to vehicle CRUD menu  |
                 ----------------------------------""");
         return ScannerInput.readNextInt("==>>");
     }
@@ -427,13 +440,13 @@ public class Driver {
                     case 2 -> deleteManufacturer();
                     case 3 -> updateManufacturer();
                     case 4 -> System.out.println(manufacturerAPI.listManufacturers());
-                    case 5-> findManufacturer();
+                    case 5 -> findManufacturer();
                     default->  System.out.println("Invalid option entered" + option);
                 }
                 ScannerInput.readNextLine("\n Press the enter key to continue");
                 option = manufacturerMenu();
             }
-
+            runMainMenu();
         }
 
         private void addManufacturer() {
@@ -485,8 +498,8 @@ public class Driver {
         //  Vehicle Menu
         //---------------------
 
-    private int vehicleReportsMenu() {
-        System.out.println(""" 
+    private void vehicleReportsMenu() {
+        int reportOption = ScannerInput.readNextInt(""" 
                 ---------- Vehicle Reports Menu  ---------------------
                | 1) List all vehicles                                 | 
                | 2) List all Electric Cars                            |
@@ -497,8 +510,50 @@ public class Driver {
                | 7) List all carbon fuel by fuel type                 |
                | 8) List the top five carbon vehicles                 |
                | 0) Return to main menu                               | 
-                 ----------------------------------------------------  """);
-        return ScannerInput.readNextInt("==>>");
+                 ---------------------------------------------------- 
+                  
+                 =====>     """);
+
+        while (reportOption != 0){
+            switch (reportOption){
+                case 1 -> System.out.println(vehicleAPI.listAllVehicles());
+                case 2 -> System.out.println(vehicleAPI.listAllElectricCars());
+                case 3 -> System.out.println(vehicleAPI.listAllCarbonFuelCars());
+                case 4 -> System.out.println(vehicleAPI.listAllScooters());
+
+                // List all vehicles registered in a given year
+                case 5 -> {
+                    listALlVehicles();
+                    int chosenYear = ScannerInput.readNextInt("Enter the year: ");
+                    System.out.println(vehicleAPI.listAllVehiclesEqualToAGivenYear(chosenYear));
+                }
+
+                // List all vehicles registered after a given year
+                case 6 -> {
+                    listALlVehicles();
+                    int chosenYear = ScannerInput.readNextInt("Enter the year: ");
+                    System.out.println(vehicleAPI.listAllVehiclesAfterAGivenYear(chosenYear));
+                }
+
+                // List all carbon fuel by fuel type
+                case 7 -> {
+                    System.out.println(vehicleAPI.listAllCarbonFuelCars());
+                    String chosenFuelType = ScannerInput.readNextLine("Enter the fuel type: ");
+                    System.out.println(vehicleAPI.listAllCarbonFuelsByFuelType(chosenFuelType));
+                }
+
+                // List top five carbon vehicles
+                case 8 -> {
+                //TODO   vehicleAPI.topFiveCarbonVehicles(vehicleAPI.getVehicleArrayList())
+                }
+
+                default->  System.out.println("Invalid option entered" + reportOption);
+            }
+            ScannerInput.readNextLine("\n Press the enter key to continue");
+            vehicleReportsMenu();
+        }
+        runMainMenu();
+
     }
     private int manufacturerReportsMenu() {
         System.out.println(""" 
