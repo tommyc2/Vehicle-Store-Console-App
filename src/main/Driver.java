@@ -31,7 +31,7 @@ public class Driver {
 
     private int mainMenu() {
         System.out.println("""
-                         -------Vehicle Store-------------
+                        --------Vehicle Store-------------
                         |  1) Manufacturer CRUD MENU     |
                         |  2) Vehicle Store CRUD MENU    |
                         |  3) Vehicle Reports MENU       |
@@ -57,7 +57,7 @@ public class Driver {
                     case 2 -> runVehicleCRUDMenu();
                     case 3 -> vehicleReportsMenu();
                     case 4 -> runManufacturerReports();
-                 //   case 6 -> //TODO sorting menu and associated (your design here)
+                    case 6 -> sortVehiclesMenu();
                     case 10 -> saveAllData();
                     case 11 -> loadAllData();
                     default ->  System.out.println("Invalid option entered" + option);
@@ -68,11 +68,30 @@ public class Driver {
             exitApp();
         }
 
-        private void exitApp(){
-            saveAllData();
-            System.out.println("Exiting....");
-            System.exit(0);
-        }
+    private void exitApp(){
+        saveAllData();
+        System.out.println("Exiting....");
+        System.exit(0);
+    }
+
+       // -------------- //
+        // Sorting Menu //
+        // ------------ //
+
+    private void sortVehiclesMenu(){
+        int option = ScannerInput.readNextInt("""
+               [-------- Sort Vehicles -----------]
+               |  1) Add a vehicle                |
+               |  2) Delete a vehicle             |
+               |  3) Update vehicle details       |
+               |  4) List all vehicles            |
+               |  0) Return to main menu          |
+               [----------------------------------]
+                
+                =====>   """);
+
+     //   while (option != 0)
+    }
 
         //---------------------------\\
         //---- Vehicle CRUD Menu -----\\
@@ -206,7 +225,9 @@ public class Driver {
                            }
                        }
                    }
-               } else {
+               }
+               else
+               {
                    System.out.println("Vehicle reg number  already exists.");
                }
            }
@@ -258,7 +279,7 @@ public class Driver {
                             int scooterIndex = ScannerInput.readNextInt("Enter scooter vehicle index:  ");
                             if (isValidIndex(vehicleAPI.getVehicleArrayList(),scooterIndex) && vehicleAPI.getVehicleByIndex(scooterIndex) instanceof Scooter){
 
-                                //TODO validate regNumber, manufacturer != null parts in Driver
+
 
                                 String regNumber = ScannerInput.readNextLine("Enter a new valid reg number:  ");
 
@@ -305,7 +326,7 @@ public class Driver {
                                 if (isValidIndex(vehicleAPI.getVehicleArrayList(),carbonCarIndex)
                                         && vehicleAPI.getVehicleByIndex(carbonCarIndex) instanceof CarbonFuelCar){
 
-                                    //TODO validate regNumber, manufacturer != null parts in Driver
+
 
                                     // Vehicle Fields
                                     String regNumber = ScannerInput.readNextLine("Enter a new valid reg number:  ");
@@ -361,7 +382,7 @@ public class Driver {
                                 if (isValidIndex(vehicleAPI.getVehicleArrayList(),electricCarIndex)
                                         && vehicleAPI.getVehicleByIndex(electricCarIndex) instanceof ElectricCar){
 
-                                    //TODO validate regNumber, manufacturer != null parts in Driver
+
 
                                     // Vehicle Fields
                                     String regNumber = ScannerInput.readNextLine("Enter a new valid reg number:  ");
@@ -623,10 +644,8 @@ public class Driver {
     private void saveAllData() {
         // Try catch for saving manufacturers to manufacturers.xml
         try {
+            //TODO fix error with manufacturers being saved to vehicles.xml
             System.out.println("Saving manufacturers to: " + vehicleAPI.fileName());
-            System.out.print("..");
-            System.out.print(".");
-            System.out.println(".");
             vehicleAPI.save();
         } catch (Exception error) {
             System.err.println("Error writing to this file: " + error);
@@ -634,10 +653,7 @@ public class Driver {
 
         // Try catch for saving vehicles to vehicles.xml
         try {
-            System.out.print("Saving vehicles to \"vehicles.xml\"");
-            System.out.print("..");
-            System.out.print(".");
-            System.out.println(".");
+            System.out.println("Saving vehicles to \"vehicles.xml\"");
             vehicleAPI.save();
         } catch (Exception e) {
             System.err.println("Error writing to this file: " + e);
@@ -649,22 +665,16 @@ public class Driver {
 
         // try-catch to load the manufacturers from XML file
         try {
-            System.out.print("Loading manufacturers from: " + vehicleAPI.fileName());
-            System.out.print("..");
-            System.out.print(".");
-            System.out.println(".");
-            vehicleAPI.save();
+            System.out.println("Loading manufacturers from: " + vehicleAPI.fileName());
+            vehicleAPI.load();
         } catch (Exception e) {
             System.err.println("Error writing to this file: " + e);
         }
 
         //try-catch to load the vehicles in the store from XML file
         try {
-            System.out.print("Loading vehicles from: "+ vehicleAPI.fileName());
-            System.out.print("..");
-            System.out.print(".");
-            System.out.println(".");
-            vehicleAPI.save();
+            System.out.println("Loading vehicles from: "+ vehicleAPI.fileName());
+            vehicleAPI.load();
         } catch (Exception e) {
             System.err.println("Error writing to this file: " + e);
         }

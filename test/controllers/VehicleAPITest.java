@@ -232,6 +232,7 @@ public class VehicleAPITest {
 
         @Test
         void deletesVehicleByRegNumberWhenVehicleDoesntExist(){
+            System.out.println(populatedVehicles.getVehicleByRegNumber("Elec5678"));
             assertEquals(0,emptyVehicles.numberOfVehicles());
             assertEquals(6,populatedVehicles.numberOfVehicles());
 
@@ -536,15 +537,15 @@ public class VehicleAPITest {
     @Nested
     class ValidationMethods {
         @Test
-        void isValidRegNumberReturnsTrueWhenRegExists(){
-            assertTrue(populatedVehicles.isValidNewRegNumber("Elec5678"));
-            assertTrue(populatedVehicles.isValidNewRegNumber("Car54321"));
+        void isValidRegNumberReturnsFalseWhenRegExists(){
+            assertFalse(populatedVehicles.isValidNewRegNumber("Elec5678"));
+            assertFalse(populatedVehicles.isValidNewRegNumber("Car54321"));
         }
 
         @Test
-        void isValidRegNumberReturnsFalseForInvalidReg(){
-            assertFalse(populatedVehicles.isValidNewRegNumber("Elec5678xxx"));
-            assertFalse(populatedVehicles.isValidNewRegNumber("Car54321xxx"));
+        void isValidRegNumberReturnstrueForInvalidReg(){
+            assertTrue(populatedVehicles.isValidNewRegNumber("Elec5678xxx"));
+            assertTrue(populatedVehicles.isValidNewRegNumber("Car54321xxx"));
         }
     }
 

@@ -44,9 +44,9 @@ public class VehicleAPI {
     }
 
     public Vehicle deleteVehicleByRegNumber(String regNumber){
-        if (isValidNewRegNumber(regNumber)){
+        if (!isValidNewRegNumber(regNumber)){
             for(Vehicle vehicle : vehicles){
-                if (vehicle.getRegNumber().equals(regNumber)){
+                if (vehicle.getRegNumber().equalsIgnoreCase(regNumber)){
                     return vehicles.remove(vehicles.indexOf(vehicle));
                 }
             }
@@ -55,9 +55,9 @@ public class VehicleAPI {
     }
 
     public Vehicle getVehicleByRegNumber(String regNumber){
-        if(isValidNewRegNumber(regNumber)){
+        if(!isValidNewRegNumber(regNumber)){
             for(Vehicle vehicle : vehicles){
-                if (vehicle.getRegNumber().equals(regNumber)){
+                if (vehicle.getRegNumber().equalsIgnoreCase(regNumber)){
                     return vehicles.get(vehicles.indexOf(vehicle));
                 }
             }
@@ -336,7 +336,7 @@ public class VehicleAPI {
 
     public boolean isValidNewRegNumber(String regNumber){
         for(Vehicle vehicle: vehicles) {
-            if (vehicle.getRegNumber().equals(regNumber))
+            if (vehicle.getRegNumber().equalsIgnoreCase(regNumber))
                 return false;
         }
         return true;
@@ -347,35 +347,66 @@ public class VehicleAPI {
     // -------------------------- //
 
     public void sortByCarbonFootprintDescending(){
-
+        for (int i = vehicles.size() - 1 ; i >= 0; i--){
+            int lowestValueIndex = 0;
+            for (int j = 0; j <= i; j++){
+                if (vehicles.get(j).getCarbonFootPrint() < vehicles.get(lowestValueIndex).getCarbonFootPrint()){
+                    lowestValueIndex = j;
+                }
+            }
+            swapVehicles(vehicles,i,lowestValueIndex);
+        }
     }
 
     public void sortByCostDescending(){
+        for (int i = vehicles.size() - 1 ; i >= 0; i--){
+            int lowestValueIndex = 0;
+            for (int j = 0; j <= i; j++){
+                if (vehicles.get(j).getCost() < vehicles.get(lowestValueIndex).getCost()){
+                    lowestValueIndex = j;
+                }
+            }
+            swapVehicles(vehicles,i,lowestValueIndex);
+        }
     }
 
     public void sortByAgeAscending(){
         for (int i = vehicles.size() - 1 ; i >=0; i--){
             int largestIndex = 0;
+            for (int j = 0; j <= i; j++){
+                if (vehicles.get(j).getAge() > vehicles.get(largestIndex).getAge()){
+                    largestIndex = j;
+                }
+            }
+            swapVehicles(vehicles,i,largestIndex);
         }
     }
 
     public void sortByCarbonFootprintAscending(){
-
+        for (int i = vehicles.size() - 1 ; i >=0; i--){
+            int largestIndex = 0;
+            for (int j = 0; j <= i; j++){
+                if (vehicles.get(j).getCarbonFootPrint() > vehicles.get(largestIndex).getCarbonFootPrint()){
+                    largestIndex = j;
+                }
+            }
+            swapVehicles(vehicles,i,largestIndex);
+        }
     }
 
-    public void swapVehicles(List<Vehicle> vehicles, int i, int j){
+    public void swapVehicles(List<Vehicle> vehicles, int i, int largestIndex){
         Vehicle vehicleI = vehicles.get(i);
-        Vehicle vehicleJ = vehicles.get(j);
+        Vehicle vehicleJ = vehicles.get(largestIndex);
 
         vehicles.set(i,vehicleJ);
-        vehicles.set(j,vehicleI);
+        vehicles.set(largestIndex,vehicleI);
     }
 
     // -------------------------- //
     //     Other Methods          //
     // -------------------------- //
     public void topFiveCarbonVehicles(List<Vehicle> vehicles){
-
+        //todo
     }
 
     
