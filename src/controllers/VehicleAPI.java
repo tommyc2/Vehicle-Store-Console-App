@@ -405,19 +405,18 @@ public class VehicleAPI {
     // -------------------------- //
     //     Other Methods          //
     // -------------------------- //
-  //  public void topFiveCarbonVehicles(List<Vehicle> vehicles){
-  //   for (int i = vehicles.size()-1; i >=0; i--){
-  //       int largestIndex = 0;
-    //     for (int j = 0; j <= i; j++){
-      //       if (vehicles.get(j).getCarbonFootPrint() < vehicles.get(largestIndex).getCarbonFootPrint()){
-    //             lowest = j;
-    //         }
-     //    }
-   //      swapVehicles(vehicles,i,largestIndex);
-
-  //       if ()
-  //   }
-  //  }
+  public void topFiveCarbonVehicles(List<Vehicle> vehicles){
+   for (int i = vehicles.size()-1; i >=0; i--){
+       int lowestIndex = 0;
+     for (int j = 0; j <= i; j++){
+       if (vehicles.get(j).getCarbonFootPrint() < vehicles.get(lowestIndex).getCarbonFootPrint()){
+             lowestIndex = j;
+         }
+         }
+      swapVehicles(vehicles,i,lowestIndex);
+   }
+   //todo make topfivecarbonvehicles give out top 5 instead of whole vehicle list
+  }
 
     
     

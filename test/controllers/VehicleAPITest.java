@@ -50,9 +50,9 @@ public class VehicleAPITest {
 
 
         //Validation: appSize(1-1000), appVersion(>=1.0), ageRating (0-18), appCost(>=0),
-        electricCarBelowBoundary = new ElectricCar("Elec987","Electric 12111", 999, mazda, 2020, 120, 5, 100, 100, 50, 100);
+        electricCarBelowBoundary = new ElectricCar("Elec987","Electric 12111", 1000, mazda, 2020, 120, 5, 100, 100, 50, 100);
 
-       electricCarOnBoundary = new ElectricCar("Elec5678", "Electric 123456", 1000, kia, 2000, 120, 4, 50, 100, 40, 100);
+       electricCarOnBoundary = new ElectricCar("Elec5678", "Electric 123456", 1001, kia, 2000, 120, 4, 50, 100, 40, 100);
 
         electricCarAboveBoundary = new ElectricCar("Elec12345", "Electric 1234567", 1001,
                 tesla, 2001, 121, 5, 51, 101, 41, 101);
@@ -232,7 +232,6 @@ public class VehicleAPITest {
 
         @Test
         void deletesVehicleByRegNumberWhenVehicleDoesntExist(){
-            System.out.println(populatedVehicles.getVehicleByRegNumber("Elec5678"));
             assertEquals(0,emptyVehicles.numberOfVehicles());
             assertEquals(6,populatedVehicles.numberOfVehicles());
 
@@ -307,7 +306,6 @@ public class VehicleAPITest {
         void listAllReturnsNoVehiclesStoredWhenArrayListIsEmpty() {
             assertEquals(0, emptyVehicles.numberOfVehicles());
             assertTrue(emptyVehicles.listAllVehicles().toLowerCase().contains("no vehicles"));
-            System.out.println(populatedVehicles.listAllVehicles());
         }
 
         @Test
@@ -383,7 +381,6 @@ public class VehicleAPITest {
 
         @Test
         void listBySelectedYearReturnsVehiclesWhenVehiclesExistForEnteredYear() {
-            System.out.println(populatedVehicles.listAllVehicles());
             assertEquals(6, populatedVehicles.numberOfVehicles());
 
             String vehicles = populatedVehicles.listAllVehiclesEqualToAGivenYear(2001);
@@ -500,12 +497,12 @@ public class VehicleAPITest {
             assertEquals(carbonFuelOnBoundary, populatedVehicles.getVehicleByIndex(5));
 
             populatedVehicles.sortByCostDescending();
-            assertEquals(carbonFuelAboveBoundary, populatedVehicles.getVehicleByIndex(0));
-            assertEquals(scooterAboveBoundary, populatedVehicles.getVehicleByIndex(1));
-            assertEquals(scooterBelowBoundary, populatedVehicles.getVehicleByIndex(2));
-            assertEquals(electricCarOnBoundary, populatedVehicles.getVehicleByIndex(3));
-            assertEquals(electricCarBelowBoundary, populatedVehicles.getVehicleByIndex(4));
-            assertEquals(carbonFuelOnBoundary, populatedVehicles.getVehicleByIndex(5));
+            assertEquals(electricCarOnBoundary, populatedVehicles.getVehicleByIndex(0));
+            assertEquals(carbonFuelAboveBoundary, populatedVehicles.getVehicleByIndex(1));
+            assertEquals(scooterAboveBoundary, populatedVehicles.getVehicleByIndex(2));
+            assertEquals(electricCarBelowBoundary, populatedVehicles.getVehicleByIndex(3));
+            assertEquals(carbonFuelOnBoundary, populatedVehicles.getVehicleByIndex(4));
+            assertEquals(scooterBelowBoundary, populatedVehicles.getVehicleByIndex(5));
         }
 
         @Test

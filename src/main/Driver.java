@@ -578,13 +578,16 @@ public class Driver {
                 // List all carbon fuel by fuel type
                 case 7 -> {
                     System.out.println(vehicleAPI.listAllCarbonFuelCars());
-                    String chosenFuelType = ScannerInput.readNextLine("Enter the fuel type: ");
-                    System.out.println(vehicleAPI.listAllCarbonFuelsByFuelType(chosenFuelType));
+                    if (vehicleAPI.numberOfCarbonCars() > 0){
+                        String chosenFuelType = ScannerInput.readNextLine("Enter the fuel type: ");
+                        System.out.println(vehicleAPI.listAllCarbonFuelsByFuelType(chosenFuelType));
+                    }
                 }
 
                 // List top five carbon vehicles
                 case 8 -> {
-                //TODO   vehicleAPI.topFiveCarbonVehicles(vehicleAPI.getVehicleArrayList())
+                    vehicleAPI.topFiveCarbonVehicles(vehicleAPI.getVehicleArrayList());
+                    System.out.println(vehicleAPI.listAllVehicles());
                 }
 
                 default->  System.out.println("Invalid option entered" + reportOption);
