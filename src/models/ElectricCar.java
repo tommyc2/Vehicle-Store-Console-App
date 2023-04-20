@@ -53,7 +53,7 @@ public class ElectricCar extends Car {
     public String toString(){
         String superStr = super.toString();
 
-        superStr += " | Engine Power (kW): " + engineKWatts + " Range: " + this.range;
+        superStr += " | Engine Power (kW): " + engineKWatts + " Range: " + this.range + "| Carbon Footprint: " + this.getCarbonFootPrint();
 
         return superStr;
     }

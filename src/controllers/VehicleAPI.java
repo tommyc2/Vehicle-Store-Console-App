@@ -405,9 +405,19 @@ public class VehicleAPI {
     // -------------------------- //
     //     Other Methods          //
     // -------------------------- //
-    public void topFiveCarbonVehicles(List<Vehicle> vehicles){
-        //todo
-    }
+  //  public void topFiveCarbonVehicles(List<Vehicle> vehicles){
+  //   for (int i = vehicles.size()-1; i >=0; i--){
+  //       int largestIndex = 0;
+    //     for (int j = 0; j <= i; j++){
+      //       if (vehicles.get(j).getCarbonFootPrint() < vehicles.get(largestIndex).getCarbonFootPrint()){
+    //             lowest = j;
+    //         }
+     //    }
+   //      swapVehicles(vehicles,i,largestIndex);
+
+  //       if ()
+  //   }
+  //  }
 
     
     
@@ -427,7 +437,7 @@ public class VehicleAPI {
 
         //list of classes that you wish to include in the serialisation, separated by a comma
         Class<?>[] classes = new Class[]{Vehicle.class, Car.class, CarbonFuelCar.class,
-                                            ElectricCar.class, Scooter.class, Manufacturer.class};
+                                            ElectricCar.class, Scooter.class};
 
         //setting up the xstream object with default security and the above classes
        XStream xstream = new XStream(new DomDriver());
@@ -454,7 +464,7 @@ public class VehicleAPI {
     }
 
     public String fileName(){
-        return this.file.toString();
+        return String.valueOf(file);
     }
 
 }

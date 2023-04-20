@@ -63,7 +63,8 @@ public class Scooter extends Vehicle {
         String superStr = super.toString();
 
         superStr +=
-        " Power: " + this.power + " Top Rider Weight: " + this.topRiderWeight + " Weight : " + this.weight + "kg";
+        " Power: " + this.power + " Top Rider Weight: " + this.topRiderWeight + " Weight : " + this.weight + "kg"
+        + "| Carbon Footprint: " + this.getCarbonFootPrint();
 
         return superStr;
     }

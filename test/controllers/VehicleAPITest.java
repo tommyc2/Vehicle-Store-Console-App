@@ -556,6 +556,9 @@ public class VehicleAPITest {
 
         String fileName2 = emptyVehicles.fileName();
         assertEquals("vehiclesempty.xml",fileName2.toString());
+
+        populatedVehicles.sortByCarbonFootprintDescending();
+        System.out.print(populatedVehicles.listAllVehicles());
     }
 
 }
