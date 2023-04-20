@@ -73,7 +73,7 @@ public abstract class Car extends Vehicle {
         String superStr = super.toString();
 
         superStr += "| Seconds To 60: " + this.secs0To60 + " Power: " + this.power + " Torque: " + this.torque
-                + "Top Speed: " + this.topSpeed;
+                + " Top Speed: " + this.topSpeed;
 
         return superStr;
     }

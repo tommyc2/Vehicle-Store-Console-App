@@ -644,9 +644,8 @@ public class Driver {
     private void saveAllData() {
         // Try catch for saving manufacturers to manufacturers.xml
         try {
-            //TODO fix error with manufacturers being saved to vehicles.xml
-            System.out.println("Saving manufacturers to: " + vehicleAPI.fileName());
-            vehicleAPI.save();
+            System.out.println("Saving manufacturers to: " + manufacturerAPI.fileName());
+            manufacturerAPI.save();
         } catch (Exception error) {
             System.err.println("Error writing to this file: " + error);
         }
@@ -665,8 +664,8 @@ public class Driver {
 
         // try-catch to load the manufacturers from XML file
         try {
-            System.out.println("Loading manufacturers from: " + vehicleAPI.fileName());
-            vehicleAPI.load();
+            System.out.println("Loading manufacturers from: " + manufacturerAPI.fileName());
+            manufacturerAPI.load();
         } catch (Exception e) {
             System.err.println("Error writing to this file: " + e);
         }
