@@ -37,9 +37,7 @@ public class Driver {
                         |  3) Vehicle Reports MENU       |
                         |  4) Manufacturers Reports MENU |
                         |--------------------------------|
-                        |  4) Search Manufacturers       |
-                        |  5) Search Vehicles            |  
-                        |  6) Sort Vehicles              | 
+                        |  5) Sort Vehicles              | 
                         |--------------------------------|
                         |  10) Save all                  |
                         |  11) Load all                  |
@@ -57,7 +55,7 @@ public class Driver {
                     case 2 -> runVehicleCRUDMenu();
                     case 3 -> vehicleReportsMenu();
                     case 4 -> runManufacturerReports();
-                    case 6 -> sortVehiclesMenu();
+                    case 5 -> sortVehiclesMenu();
                     case 10 -> saveAllData();
                     case 11 -> loadAllData();
                     default ->  System.out.println("Invalid option entered" + option);
@@ -81,16 +79,37 @@ public class Driver {
     private void sortVehiclesMenu(){
         int option = ScannerInput.readNextInt("""
                [-------- Sort Vehicles -----------]
-               |  1) Add a vehicle                |
-               |  2) Delete a vehicle             |
-               |  3) Update vehicle details       |
-               |  4) List all vehicles            |
-               |  0) Return to main menu          |
+               |  1) Sort by cost descending       -------]
+               |  2) Sort by age ascending                |
+               |  3) Sort by carbon footprint descending  |   
+               |  4) Sort by carbon footprint ascending   |       
+               |  0) Return to main menu          --------]
                [----------------------------------]
-                
                 =====>   """);
-
-     //   while (option != 0)
+        while (option != 0) {
+            switch (option) {
+                case 1 -> {
+                    vehicleAPI.sortByCostDescending();
+                    listALlVehicles();
+                }
+                case 2 -> {
+                    vehicleAPI.sortByAgeAscending();
+                    listALlVehicles();
+                }
+                case 3 -> {
+                    vehicleAPI.sortByCarbonFootprintDescending();
+                    listALlVehicles();
+                }
+                case 4 -> {
+                    vehicleAPI.sortByCarbonFootprintAscending();
+                    listALlVehicles();
+                }
+                default -> System.out.println("Invalid option entered" + option);
+            }
+            ScannerInput.readNextLine("\n Press the enter key to continue");
+            sortVehiclesMenu();
+        }
+        runMainMenu();
     }
 
         //---------------------------\\
