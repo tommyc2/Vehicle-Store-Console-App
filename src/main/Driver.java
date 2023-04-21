@@ -506,6 +506,7 @@ public class Driver {
             if (manufacturerAPI.removeManufacturerByName(manufacturerName) != null){
                 System.out.println("Delete successful");
             }
+
             else{
                 System.out.println("Delete not successful");
             }
