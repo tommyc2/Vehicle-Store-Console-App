@@ -614,6 +614,7 @@ public class Driver {
                 case 2-> listAllVehiclesFromaGivenManufacturer();
                 default->  System.out.println("Invalid option entered" + option);
             }
+
             ScannerInput.readNextLine("\n Press the enter key to continue");
             option =  manufacturerReportsMenu();
         }
