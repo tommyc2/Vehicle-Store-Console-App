@@ -14,13 +14,12 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import static utils.Utilities.isValidIndex;
 
 
-public class VehicleAPI {
+public class VehicleAPI implements Serializer {
 
-    private List<Vehicle> vehicles;
+    private List<Vehicle> vehicles = new ArrayList<>();
     private File file;
     public VehicleAPI(File file) {
         this.file = file;
-        vehicles = new ArrayList<>();
     }
 
     public List<Vehicle> getVehicleArrayList(){
@@ -405,17 +404,25 @@ public class VehicleAPI {
     // -------------------------- //
     //     Other Methods          //
     // -------------------------- //
-  public void topFiveCarbonVehicles(List<Vehicle> vehicles){
+  public String topFiveCarbonVehicles(List<Vehicle> vehicles){
    for (int i = vehicles.size()-1; i >=0; i--){
-       int lowestIndex = 0;
+       int highestIndex = 0;
      for (int j = 0; j <= i; j++){
-       if (vehicles.get(j).getCarbonFootPrint() < vehicles.get(lowestIndex).getCarbonFootPrint()){
-             lowestIndex = j;
+       if (vehicles.get(j).getCarbonFootPrint() > vehicles.get(highestIndex).getCarbonFootPrint()){
+             highestIndex = j;
          }
          }
-      swapVehicles(vehicles,i,lowestIndex);
+      swapVehicles(vehicles,i,highestIndex);
    }
-   //todo make topfivecarbonvehicles give out top 5 instead of whole vehicle list
+
+   // Returning List of top 5
+   String top5List = "";
+   for(int k = 0; k < 5; k++){
+       if (getVehicleByIndex(k) != null) {
+           top5List += (k+1) + ":" + getVehicleByIndex(k).toString() + "\n";
+       }
+   }
+      return top5List;
   }
 
     
@@ -462,6 +469,7 @@ public class VehicleAPI {
         out.close();
     }
 
+    @Override
     public String fileName(){
         return String.valueOf(file);
     }

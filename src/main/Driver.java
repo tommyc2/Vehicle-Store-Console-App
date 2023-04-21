@@ -586,8 +586,7 @@ public class Driver {
 
                 // List top five carbon vehicles
                 case 8 -> {
-                    vehicleAPI.topFiveCarbonVehicles(vehicleAPI.getVehicleArrayList());
-                    System.out.println(vehicleAPI.listAllVehicles());
+                    System.out.println(vehicleAPI.topFiveCarbonVehicles(vehicleAPI.getVehicleArrayList()));
                 }
 
                 default->  System.out.println("Invalid option entered" + reportOption);
@@ -603,7 +602,6 @@ public class Driver {
                 ---------- Manufacturers Reports Menu  -------------
                | 1) List Manufacturers                              | 
                | 2) List all vehicles from a given manufacturer     |
-               | 3) List Manufacturers by a given name              |
                | 0) Return to main menu                             | 
                  ---------------------------------------------------  """);
         return ScannerInput.readNextInt("==>>");
@@ -614,7 +612,6 @@ public class Driver {
             switch (option) {
                 case 1-> System.out.println(manufacturerAPI.listManufacturers());
                 case 2-> listAllVehiclesFromaGivenManufacturer();
-                case 3-> listAllManufacturersByInputtedName();
                 default->  System.out.println("Invalid option entered" + option);
             }
             ScannerInput.readNextLine("\n Press the enter key to continue");
@@ -630,11 +627,6 @@ public class Driver {
         System.out.println(vehicleAPI.listAllVehiclesByChosenManufacturer(m));
         else
             System.out.println("No manufacturer with tha name exists");
-    }
-
-    private void listAllManufacturersByInputtedName(){
-            String manufacturerName = ScannerInput.readNextLine("Type in a manufacturer name for similar/exact names: ");
-            System.out.println(manufacturerAPI.listAllManufacturersByManufacturerName(manufacturerName));
     }
 
     //--------------------------------------------------

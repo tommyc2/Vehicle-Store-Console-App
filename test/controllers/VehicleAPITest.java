@@ -79,7 +79,6 @@ public class VehicleAPITest {
                 tesla, 2001, 121, 5, 51, 101, "petrol",
                 6, 2, 801, false);
 
-        //TODO Fix issue with null data
       /*  carbonFuelInvalidData = new CarbonFuelCar(null, null, -1,
                 null, -1, -1, -1, -1, -1, null,
                 -1, -1, -1, false); */
@@ -92,8 +91,6 @@ public class VehicleAPITest {
         populatedVehicles.addVehicle(electricCarBelowBoundary); //MAZ123 Year:2020
         populatedVehicles.addVehicle(scooterAboveBoundary);     //SC 12345 Year:2001
        // populatedVehicles.addVehicle(electricCarInvalidData);   //not added as the reg is null
-        // TODO Fix error with null object being added to arraylist
-
         populatedVehicles.addVehicle(carbonFuelOnBoundary);     //Car54321 Year:2000
     }
 
@@ -512,6 +509,37 @@ public class VehicleAPITest {
         }
 
         @Test
+        void sortByAgeAscendingTest(){
+            assertEquals(6, populatedVehicles.numberOfVehicles());
+
+            // Checking Order of list before sorting
+            populatedVehicles.sortByAgeAscending();
+
+            assertEquals(electricCarBelowBoundary,populatedVehicles.getVehicleByIndex(0));
+            assertEquals(carbonFuelAboveBoundary,populatedVehicles.getVehicleByIndex(1));
+            assertEquals(scooterAboveBoundary,populatedVehicles.getVehicleByIndex(2));
+            assertEquals(populatedVehicles.getVehicleByRegNumber("Elec5678"),populatedVehicles.getVehicleByIndex(3));
+            assertEquals(populatedVehicles.getVehicleByRegNumber("Car54321"),populatedVehicles.getVehicleByIndex(4));
+            assertEquals(populatedVehicles.getVehicleByRegNumber("SCOOT12"),populatedVehicles.getVehicleByIndex(5));
+
+        }
+
+        @Test
+        void sortByCarbonFootprintAscending(){
+            assertEquals(6, populatedVehicles.numberOfVehicles());
+
+            // Checking Order of list before sorting
+            populatedVehicles.sortByCarbonFootprintAscending();
+
+            assertEquals(electricCarBelowBoundary,populatedVehicles.getVehicleByIndex(0));
+            assertEquals(populatedVehicles.getVehicleByRegNumber("Elec5678"),populatedVehicles.getVehicleByIndex(1));
+            assertEquals(populatedVehicles.getVehicleByRegNumber("SCOOT12"),populatedVehicles.getVehicleByIndex(2));
+            assertEquals(populatedVehicles.getVehicleByRegNumber("SC 12345"),populatedVehicles.getVehicleByIndex(3));
+            assertEquals(populatedVehicles.getVehicleByRegNumber("Car54321"),populatedVehicles.getVehicleByIndex(4));
+            assertEquals(populatedVehicles.getVehicleByRegNumber("Car34567"),populatedVehicles.getVehicleByIndex(5));
+        }
+
+        @Test
         void swappingVehiclesSwapsVehiclesAtIndexesNamed(){
         assertEquals(6, populatedVehicles.numberOfVehicles());
 
@@ -555,7 +583,6 @@ public class VehicleAPITest {
         assertEquals("vehiclesempty.xml",fileName2.toString());
 
         populatedVehicles.sortByCarbonFootprintDescending();
-        System.out.print(populatedVehicles.listAllVehicles());
     }
 
 }

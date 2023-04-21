@@ -1,20 +1,131 @@
 <object-stream>
   <list>
     <models.ElectricCar>
-      <regNumber>45342</regNumber>
-      <year>2023</year>
-      <cost>6565.0</cost>
+      <regNumber>6363636</regNumber>
+      <year>2000</year>
+      <cost>636363.0</cost>
       <manufacturer>
-        <manufacturerName>mazda</manufacturerName>
-        <numEmployees>54</numEmployees>
+        <manufacturerName>ford</manufacturerName>
+        <numEmployees>800</numEmployees>
       </manufacturer>
-      <model>6565</model>
-      <secs0To60>8</secs0To60>
+      <model>3636363</model>
+      <secs0To60>4</secs0To60>
       <power>120</power>
       <torque>100.0</torque>
       <topSpeed>50</topSpeed>
       <range>100</range>
       <engineKWatts>40.0</engineKWatts>
     </models.ElectricCar>
+    <models.ElectricCar>
+      <regNumber>595499</regNumber>
+      <year>2000</year>
+      <cost>2.05025E9</cost>
+      <manufacturer>
+        <manufacturerName>mazda</manufacturerName>
+        <numEmployees>57575</numEmployees>
+      </manufacturer>
+      <model>52052050</model>
+      <secs0To60>4</secs0To60>
+      <power>120</power>
+      <torque>100.0</torque>
+      <topSpeed>50</topSpeed>
+      <range>100</range>
+      <engineKWatts>40.0</engineKWatts>
+    </models.ElectricCar>
+    <models.CarbonFuelCar>
+      <regNumber>434343</regNumber>
+      <year>2000</year>
+      <cost>1000.0</cost>
+      <manufacturer>
+        <manufacturerName>4</manufacturerName>
+        <numEmployees>141</numEmployees>
+      </manufacturer>
+      <model>1313</model>
+      <secs0To60>4</secs0To60>
+      <power>120</power>
+      <torque>100.0</torque>
+      <topSpeed>67</topSpeed>
+      <fuelConsumption>5.0</fuelConsumption>
+      <carbonEmission>4.0</carbonEmission>
+      <automatic>false</automatic>
+      <fuelType>petrol</fuelType>
+      <engineSize>800</engineSize>
+    </models.CarbonFuelCar>
+    <models.CarbonFuelCar>
+      <regNumber>687878</regNumber>
+      <year>2000</year>
+      <cost>1000.0</cost>
+      <manufacturer>
+        <manufacturerName>8</manufacturerName>
+        <numEmployees>8</numEmployees>
+      </manufacturer>
+      <model>87</model>
+      <secs0To60>4</secs0To60>
+      <power>120</power>
+      <torque>100.0</torque>
+      <topSpeed>87</topSpeed>
+      <fuelConsumption>5.0</fuelConsumption>
+      <carbonEmission>8.0</carbonEmission>
+      <automatic>false</automatic>
+      <fuelType>petrol</fuelType>
+      <engineSize>800</engineSize>
+    </models.CarbonFuelCar>
+    <models.CarbonFuelCar>
+      <regNumber>434343</regNumber>
+      <year>2000</year>
+      <cost>1000.0</cost>
+      <manufacturer>
+        <manufacturerName>ford</manufacturerName>
+        <numEmployees>67</numEmployees>
+      </manufacturer>
+      <model>ford fiesta</model>
+      <secs0To60>4</secs0To60>
+      <power>120</power>
+      <torque>100.0</torque>
+      <topSpeed>67</topSpeed>
+      <fuelConsumption>5.0</fuelConsumption>
+      <carbonEmission>67.0</carbonEmission>
+      <automatic>false</automatic>
+      <fuelType>petrol</fuelType>
+      <engineSize>800</engineSize>
+    </models.CarbonFuelCar>
+    <models.CarbonFuelCar>
+      <regNumber>777777</regNumber>
+      <year>2000</year>
+      <cost>7777.0</cost>
+      <manufacturer>
+        <manufacturerName>7777</manufacturerName>
+        <numEmployees>777777</numEmployees>
+      </manufacturer>
+      <model>7777</model>
+      <secs0To60>4</secs0To60>
+      <power>120</power>
+      <torque>100.0</torque>
+      <topSpeed>67</topSpeed>
+      <fuelConsumption>5.0</fuelConsumption>
+      <carbonEmission>7777.0</carbonEmission>
+      <automatic>false</automatic>
+      <fuelType>diesel</fuelType>
+      <engineSize>800</engineSize>
+    </models.CarbonFuelCar>
+    <models.CarbonFuelCar>
+      <regNumber>84</regNumber>
+      <year>2000</year>
+      <cost>1000.0</cost>
+      <manufacturer>
+        <manufacturerName>84</manufacturerName>
+        <numEmployees>84</numEmployees>
+      </manufacturer>
+      <model>84</model>
+      <secs0To60>4</secs0To60>
+      <power>120</power>
+      <torque>100.0</torque>
+      <topSpeed>67</topSpeed>
+      <fuelConsumption>5.0</fuelConsumption>
+      <carbonEmission>4.848485E7</carbonEmission>
+      <automatic>false</automatic>
+      <fuelType>petrol</fuelType>
+      <engineSize>800</engineSize>
+    </models.CarbonFuelCar>
   </list>
 </object-stream>

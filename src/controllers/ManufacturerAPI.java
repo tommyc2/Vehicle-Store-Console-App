@@ -74,7 +74,8 @@ public class ManufacturerAPI implements Serializer {
             }
             if (listManufacturers.equals("")) {
                 return "No manufacturers of that name";
-            } else {
+            }
+            else {
                 return listManufacturers;
             }
         }
